@@ -34,7 +34,7 @@ export default function WelcomeScreen () {
           </TouchableOpacity>
         </View>
         <View style={styles.blejac}>
-          <Image source={require('./images/blejac.png')}></Image>
+          <Image source={require('./assets/images/blejac.png')}></Image>
         </View>
       </View>
       </ImageBackground>
