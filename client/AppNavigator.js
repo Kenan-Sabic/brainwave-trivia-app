@@ -15,15 +15,15 @@ const Stack = createNativeStackNavigator();
 
 function AppNavigator() {
     return (
-        <Stack.Navigator initialRouteName='Welcome'>
+        <Stack.Navigator initialRouteName='Login'>
             <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false}} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="PlayMenu" component={PlayMenuScreen} />
-            <Stack.Screen name="Leaderboard" component={LeaderBoardMenuScreen} />
-            <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} />
-            <Stack.Screen name="QuizTF" component={QuizTFScreen} />
-            <Stack.Screen name="GameOver" component={GameOverScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
+            <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false}} />
+            <Stack.Screen name="PlayMenu" component={PlayMenuScreen}  options={{headerShown: false}}/>
+            <Stack.Screen name="Leaderboard" component={LeaderBoardMenuScreen} options={{headerShown: false}} />
+            <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false}} />
+            <Stack.Screen name="QuizTF" component={QuizTFScreen} options={{headerShown: false}} />
+            <Stack.Screen name="GameOver" component={GameOverScreen}  options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }
