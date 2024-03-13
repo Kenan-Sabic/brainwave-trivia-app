@@ -27,7 +27,7 @@ export default function WelcomeScreen () {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Sign up</Text>
+            <Text style={styles.buttonText} onPress={() => navigation.navigate('Leaderboard')}>Sign up</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Play as guest</Text>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center'
+    
   },
   background: {
     height: '100%',
