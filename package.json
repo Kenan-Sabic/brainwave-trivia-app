@@ -2,11 +2,15 @@
   "name": "brainwave-trivia-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./client/App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "expo": "^50.0.13",
+    "react-native-svg": "^15.1.0"
+  }
 }
