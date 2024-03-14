@@ -8,6 +8,7 @@ import LoginScreen from './LoginScreen';
 export default function WelcomeScreen () {
   let [fontsLoaded] = useFonts({
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
+    'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
   });
   if (!fontsLoaded) {
     return null;
@@ -27,7 +28,7 @@ export default function WelcomeScreen () {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Sign up</Text>
+            <Text style={styles.buttonText} onPress={() => navigation.navigate('Leaderboard')}>Sign up</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Play as guest</Text>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center'
+    
   },
   background: {
     height: '100%',
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 50,
     fontSize: 50,
-    color: 'white'
+    color: 'white',
+    fontFamily: 'Monofett-Regular'
   }
 });
 
