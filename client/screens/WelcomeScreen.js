@@ -8,6 +8,7 @@ import LoginScreen from './LoginScreen';
 export default function WelcomeScreen () {
   let [fontsLoaded] = useFonts({
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
+    'Monofett-Regular': require('./assets/fonts/Monofett-Regular'),
   });
   if (!fontsLoaded) {
     return null;
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 50,
     fontSize: 50,
-    color: 'white'
+    color: 'white',
+    fontFamily: 'Monofett-Regular'
   }
 });
 

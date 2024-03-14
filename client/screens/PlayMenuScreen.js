@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function PlayMenuScreen () {
   let [fontsLoaded] = useFonts({
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
+    'Monofett-Regular': require('./assets/fonts/Monofett-Regular'),
   });
   if (!fontsLoaded) {
     return null;
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   title:{
     padding:10,
     fontSize:55,
-    fontFamily: "monospace"
+    fontFamily: 'Monofett-Regular'
   },
   buttonsContainer: {
     flexDirection: 'row',
