@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function PlayMenuScreen () {
   let [fontsLoaded] = useFonts({
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
-    'Monofett-Regular': require('./assets/fonts/Monofett-Regular'),
+    'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
   });
   if (!fontsLoaded) {
     return null;
