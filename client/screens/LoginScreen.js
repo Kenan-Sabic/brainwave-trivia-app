@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput } from 'react-native';
 
 export default function LoginScreen  () {
 
@@ -26,7 +26,7 @@ export default function LoginScreen  () {
           <Text style={styles.loginMessage}>Log Into your account</Text>
           <TextInput value="User Name" style={styles.inputField}></TextInput>
           <TextInput value="Password" style={styles.inputField}></TextInput>
-        
+          <Pressable  style={styles.loginButton}><Text style={styles.loginText}>Log In</Text></Pressable>
         </View>
       </ImageBackground>
     </View>
@@ -73,5 +73,19 @@ const styles = StyleSheet.create({
     fontSize:24,
     fontFamily:"Orbitron-Bold",
   },
-  
+  loginButton:{
+    marginTop:30,
+    backgroundColor:"#6EBFBB",
+    width:"90%",
+    padding:10,
+    textAlign:"center",
+    borderRadius:5
+
+  },
+  loginText:{
+    textAlign:"center",
+    width:"100%",
+    fontFamily:"Orbitron-Bold",
+    fontSize:20
+  }
 })
