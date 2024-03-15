@@ -26,7 +26,7 @@ export default function LoginScreen  () {
           <Text style={styles.loginMessage}>Log Into your account</Text>
           <TextInput value="User Name" style={styles.inputField}></TextInput>
           <TextInput value="Password" style={styles.inputField}></TextInput>
-          <Pressable  style={styles.loginButton}><Text style={styles.loginText}>Log In</Text></Pressable>
+          <Pressable onPress={() => navigation.navigate('Leaderboard')} style={styles.loginButton}><Text style={styles.loginText}>Log In</Text></Pressable>
         </View>
       </ImageBackground>
     </View>
