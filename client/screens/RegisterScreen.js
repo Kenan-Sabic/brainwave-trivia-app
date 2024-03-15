@@ -1,13 +1,13 @@
 import React from 'react'
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput } from 'react-native';
 
 
 export default function RegisterScreen() {
 
 
-
+const navigation = useNavigation();
 let [fontsLoaded] = useFonts({
     
   'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
@@ -16,7 +16,7 @@ let [fontsLoaded] = useFonts({
 if (!fontsLoaded) {
   return null;
 }
-const navigation = useNavigation();
+
 
 return (
   <View >

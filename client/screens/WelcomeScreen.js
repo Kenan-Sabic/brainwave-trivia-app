@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import LoginScreen from './LoginScreen';
 
 
 export default function WelcomeScreen () {
+  const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
@@ -13,12 +13,12 @@ export default function WelcomeScreen () {
   if (!fontsLoaded) {
     return null;
   }
-  const navigation = useNavigation();
+
 
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-      <View style={styles.darkness}>
+      <View style={styles.container2}>
         <View style={styles.logo}>
         <Image source={require('./assets/images/Logo.png')}></Image>
         </View>
@@ -55,25 +55,31 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  darkness: {
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    width: '100%',
-    height:'100%',
+  container2: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-start',
+    top: 0,
+    marginTop: 50
   },
   logo: {
-    marginBottom: 50
   },
   button: {
     backgroundColor: '#6EBFBB',
     width: 310,
     height: 50,
-    marginVertical: 10,
+    marginVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 15,
-    
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonsContainer: {
     marginBottom: 150
@@ -88,8 +94,8 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 50,
-    fontSize: 50,
-    color: 'white',
+    fontSize: 55,
+    color: 'black',
     fontFamily: 'Monofett-Regular'
   }
 });

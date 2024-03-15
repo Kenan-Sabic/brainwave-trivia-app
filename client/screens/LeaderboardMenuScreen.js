@@ -11,6 +11,7 @@ export default function LeaderBoardMenuScreen () {
   const [modalVisible, setModalVisible] = useState(false);
 
   let [fontsLoaded] = useFonts({
+    'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
   });
   if (!fontsLoaded) {
@@ -21,8 +22,8 @@ export default function LeaderBoardMenuScreen () {
     <View style={styles.container}>
      <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
     <View style={styles.container2}>
-    <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> 
-        <Text style={styles.title}>Brainwave</Text>
+      <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> 
+        <Text style={styles.title}>BRAINWAVE</Text>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity style={styles.button1} >
             <Text style={styles.buttonText} onPress={() => navigation.navigate('PlayMenu')}>Play</Text>
@@ -53,7 +54,7 @@ export default function LeaderBoardMenuScreen () {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.modalButton}
-                // onPress={() => navigation.navigate("Login")}
+                onPress={() => navigation.navigate("Login")}
               >
                 <Text style={styles.modalButtonText}>True/False</Text>
               </TouchableOpacity>
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
   title:{
     padding:10,
     fontSize:55,
-    fontFamily: "monospace"
+    fontFamily: 'Monofett-Regular'
   },
   buttonsContainer: {
     flexDirection: 'row',
