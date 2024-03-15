@@ -18,7 +18,7 @@ export default function PlayMenuScreen() {
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
         <View style={styles.darkness}>
           <View style={styles.logo}>
-            <Image source={require('./assets/images/Logo.png')} />
+          <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  />
           </View>
           <Text style={styles.title}>BRAINWAVE</Text>
           <View style={styles.buttonsContainer}>
@@ -97,6 +97,12 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     fontFamily: 'Orbitron-Bold' //need to find figma one 
+  },
+  logoBanner:{
+    flex:0,
+    width:325,
+    height:140,
+    resizeMode: 'contain'
   },
   title: {
     marginBottom: 50,
