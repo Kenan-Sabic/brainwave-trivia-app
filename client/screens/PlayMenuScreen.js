@@ -23,8 +23,8 @@ export default function PlayMenuScreen() {
           <Text style={styles.title}>BRAINWAVE</Text>
           <View style={styles.buttonsContainer}>
           <View style={styles.buttonsContainer2}>
-              <TouchableOpacity style={[styles.button, styles.TwoButtons]}>
-                <Text style={styles.buttonText}>Play</Text>
+              <TouchableOpacity style={[styles.button, styles.TwoButtons]} onPress={() => navigation.navigate('GameOver')}>
+                <Text style={styles.buttonText }>Play</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, styles.TwoButtons]}>
                 <Text style={styles.buttonText}>Leaderboard</Text>
