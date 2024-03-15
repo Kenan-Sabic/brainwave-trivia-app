@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Pressable, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput } from 'react-native';
 
 export default function LoginScreen  () {
-
+  const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
     
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
@@ -13,12 +13,12 @@ export default function LoginScreen  () {
   if (!fontsLoaded) {
     return null;
   }
-  const navigation = useNavigation();
+  
 
 
 
   return (
-    <View >
+    <View style={styles.container} >
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
         <View style={styles.container}>
           <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  />
