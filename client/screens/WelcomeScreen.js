@@ -28,9 +28,9 @@ export default function WelcomeScreen () {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText} onPress={() => navigation.navigate('Leaderboard')}>Sign up</Text>
+            <Text style={styles.buttonText} onPress={() => navigation.navigate('Register')}>Sign up</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PlayMenu')}>
             <Text style={styles.buttonText}>Play as guest</Text>
           </TouchableOpacity>
         </View>

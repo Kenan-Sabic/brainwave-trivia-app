@@ -28,7 +28,7 @@ return (
         <TextInput value="Username" style={styles.inputField}></TextInput>
         <TextInput value="Password" style={styles.inputField}></TextInput>
         <TextInput value="Confirm Password" style={styles.inputField}></TextInput>
-        <TouchableOpacity style={styles.button} >
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PlayMenu')} >
               <Text style={styles.buttonText}>REGISTER</Text>
             </TouchableOpacity>
 

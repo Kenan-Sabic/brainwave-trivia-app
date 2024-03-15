@@ -23,7 +23,7 @@ export default function GameOverScreen() {
             <Text style={styles.bannerText}>BRAINWAVE</Text>
           </View>
           
-          <Text>Game Over!</Text>
+          <Text>GAME OVER</Text>
         </View>
       </ImageBackground>
     </View> 
