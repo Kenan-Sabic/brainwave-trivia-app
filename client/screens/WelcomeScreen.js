@@ -1,11 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 
 
 export default function WelcomeScreen () {
+  const screenWidth = Dimensions.get('window').width;
   const navigation = useNavigation();
+  
   let [fontsLoaded] = useFonts({
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
@@ -24,19 +26,21 @@ export default function WelcomeScreen () {
         </View>
         <Text style={styles.title}>BRAINWAVE</Text>
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]} onPress={() => navigation.navigate('Login')}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]}>
             <Text style={styles.buttonText} onPress={() => navigation.navigate('Register')}>Sign up</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PlayMenu')}>
+          <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]} onPress={() => navigation.navigate('PlayMenu')}>
             <Text style={styles.buttonText}>Play as guest</Text>
           </TouchableOpacity>
         </View>
+        {screenWidth <= 800 && (
         <View style={styles.blejac}>
           <Image source={require('./assets/images/blejac.png')}></Image>
         </View>
+        )}
       </View>
       </ImageBackground>
     </View>
@@ -81,6 +85,22 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  buttonDesktop: {
+    backgroundColor: '#6EBFBB',
+    width: 700,
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
   buttonsContainer: {
     marginBottom: 150
   },
@@ -90,7 +110,7 @@ const styles = StyleSheet.create({
   },
   blejac: {
     position: 'absolute',
-    bottom: 0
+    bottom: 0,
   },
   title: {
     marginBottom: 50,

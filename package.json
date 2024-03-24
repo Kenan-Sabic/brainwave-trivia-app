@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "expo": "^50.0.13",
-    "react-native-svg": "^15.1.0"
+    "metro": "^0.80.6"
   }
 }

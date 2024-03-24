@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, ImageBackground, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, ImageBackground, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 
 export default function PlayMenuScreen() {
 
   const navigation = useNavigation();
+  const screenWidth = Dimensions.get('window').width;
 
   let [fontsLoaded] = useFonts({
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
@@ -20,31 +21,31 @@ export default function PlayMenuScreen() {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-      <View style={styles.container2}>
-          <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  />
+      <View style={[styles.container2, screenWidth > 800 && styles.container2Desktop]}>
+      {screenWidth <= 800 && (<Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
           
           <Text style={styles.title}>BRAINWAVE</Text>
           <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button1} >
-            <Text style={styles.buttonText} onPress={() => navigation.navigate('PlayMenu')}>Play</Text>
+          <TouchableOpacity style={[styles.button1, screenWidth > 800 && styles.button1Desktop]} >
+            <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('PlayMenu')}>Play</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button2}>
-            <Text style={styles.buttonText} onPress={() => navigation.navigate('Leaderboard')}>Leaderboard</Text>
+          <TouchableOpacity style={[styles.button2, screenWidth > 800 && styles.button2Desktop]}>
+            <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('Leaderboard')}>Leaderboard</Text>
           </TouchableOpacity>
           </View>
           <View style={styles.questionsContainer}>
-            <TouchableOpacity style={styles.button} >
-              <Text style={styles.buttonText} onPress={() => navigation.navigate('QuizMCQ')}>Multiple Choice</Text>
+            <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]} >
+              <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('QuizMCQ')}>Multiple Choice</Text>
             </TouchableOpacity>
          
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText} onPress={() => navigation.navigate('QuizTF')}>True/False</Text>
+            <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]}>
+              <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('QuizTF')}>True/False</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Fill in the blank</Text>
+            <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]}>
+              <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]}>Fill in the blank</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Mixed</Text>
+            <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]}>
+              <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]}>Mixed</Text>
             </TouchableOpacity>
             </View>
             </View>
@@ -67,26 +68,23 @@ const styles = StyleSheet.create({
     top: 0,
     marginTop: 50
   },
+  container2Desktop: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    top: 0,
+    marginTop: 15
+  },
   background: {
     height: '100%',
     width: '100%',
   },
-  darkness: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    top: 0,
-    paddingTop: 50
-  },
   questionsContainer: {
-    width: 316,
+    width: 616,
     marginTop: 30,
   },
   button: {
-    backgroundColor: '#6EBFBB',  //could be changed to more vibrant 
+    backgroundColor: '#6EBFBB',  
     width: 316,
     height: 50,
     marginVertical: 10,
@@ -101,7 +99,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    
+  },
+  buttonDesktop: {
+    backgroundColor: '#6EBFBB',  
+    width: 616,
+    height: 50,
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -110,6 +124,25 @@ const styles = StyleSheet.create({
   button2: {
     height: 50,
     width: 150,
+    marginHorizontal: 8,
+    backgroundColor: 'rgba(110, 191, 187, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomEndRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button2Desktop: {
+    height: 70,
+    width: 300,
     marginHorizontal: 8,
     backgroundColor: 'rgba(110, 191, 187, 0.5)',
     justifyContent: 'center',
@@ -137,9 +170,32 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  button1Desktop: {
+    height: 70,
+    width: 300,
+    marginHorizontal: 8,
+    backgroundColor: '#6EBFBB',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomStartRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
   buttonText: {
     fontSize: 20,
     fontFamily: 'Orbitron-Bold' //need to find figma one 
+  },
+  buttonTextDesktop: {
+    fontSize: 30,
+    fontFamily: 'Orbitron-Bold'
   },
   logoBanner:{
     width:325,
@@ -147,7 +203,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   title: {
-    padding:10,
+  
     fontSize:55,
     color: 'black',
     fontFamily: 'Monofett-Regular' 

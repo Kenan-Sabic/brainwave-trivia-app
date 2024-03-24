@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
@@ -8,6 +8,8 @@ import { useState } from 'react';
 export default function LeaderBoardMenuScreen () {
   
   const navigation = useNavigation();
+  const screenWidth = Dimensions.get('window').width;
+
   const [modalVisible, setModalVisible] = useState(false);
 
   let [fontsLoaded] = useFonts({
@@ -21,20 +23,24 @@ export default function LeaderBoardMenuScreen () {
   return (
     <View style={styles.container}>
      <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-    <View style={styles.container2}>
-      <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> 
+    <View style={[styles.container2, screenWidth > 800 && styles.container2Desktop]}>
+      {screenWidth <= 800 && (<Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
         <Text style={styles.title}>BRAINWAVE</Text>
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button1} >
-            <Text style={styles.buttonText} onPress={() => navigation.navigate('PlayMenu')}>Play</Text>
+        <TouchableOpacity style={[styles.button1, screenWidth > 800 && styles.button1Desktop]} >
+            <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('PlayMenu')}>Play</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button2}>
-            <Text style={styles.buttonText}>Leaderboard</Text>
+          <TouchableOpacity style={[styles.button2, screenWidth > 800 && styles.button2Desktop]}>
+            <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('Leaderboard')}>Leaderboard</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.button3}>
+        {screenWidth <= 800 && (
+          <TouchableOpacity style={styles.button3}>
             <Text style={styles.buttonText} onPress={() => setModalVisible(true)}>Question type</Text>
         </TouchableOpacity>
+        )}
+
+        {screenWidth <= 800 && (
         <Modal
           animationType="fade"
           transparent={true}
@@ -75,7 +81,36 @@ export default function LeaderBoardMenuScreen () {
           
           </TouchableOpacity>
         </Modal>
-        <View style={styles.leaderboard}>
+        )}
+        {screenWidth > 800 && (
+          <View style={styles.leaderboardButtons}>
+            <TouchableOpacity
+                style={styles.leaderButton}
+                onPress={() => navigation.navigate('Login')}
+              >
+                <Text style={styles.modalButtonText}>Multiple choice</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.leaderButton}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <Text style={styles.modalButtonText}>True/False</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.leaderButton}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <Text style={styles.modalButtonText}>Fill in the blank</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.leaderButton}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <Text style={styles.modalButtonText}>Mixed questions</Text>
+              </TouchableOpacity>
+          </View>
+        )}
+        <View style={[styles.leaderboard, screenWidth > 800 && styles.leaderboardDesktop]}>
           <View>
             <Text style={styles.leaderboardText}>Username</Text>
             <Text style={styles.leaderboardUser}>1.</Text>
@@ -125,6 +160,13 @@ const styles = StyleSheet.create({
     top: 0,
     marginTop: 50
   },
+  container2Desktop: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    top: 0,
+    marginTop: 15
+  },
   background: {
     height: '100%',
     width: '100%',
@@ -136,7 +178,6 @@ const styles = StyleSheet.create({
 
   },
   title:{
-    padding:10,
     fontSize:55,
     fontFamily: 'Monofett-Regular'
   },
@@ -153,7 +194,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    borderBottomStartRadius: 15
+    borderBottomStartRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button1Desktop: {
+    height: 70,
+    width: 300,
+    marginHorizontal: 8,
+    backgroundColor: 'rgba(110, 191, 187, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomStartRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   button2: {
     height: 50,
@@ -173,6 +241,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  button2Desktop: {
+    height: 70,
+    width: 300,
+    marginHorizontal: 8,
+    backgroundColor: '#6EBFBB',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomEndRadius: 15
+  },
+  buttonTextDesktop: {
+    fontSize: 30,
+    fontFamily: 'Orbitron-Bold'
   },
   button3: {
     height: 40,
@@ -203,6 +286,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderRadius: 15
+  },
+  leaderboardDesktop: {
+    backgroundColor: '#6EBFBB',
+    width: 1000,
+    height: 600,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 15,
   },
   leaderboardText: {
     fontSize: 25,
@@ -267,5 +358,17 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Orbitron-Bold',
   },
+  leaderboardButtons: {
+    flexDirection: 'row',
+    width: 1000,
+  },
+  leaderButton: {
+    borderRadius: 15,
+    padding: 10,
+    alignItems: "center",
+    backgroundColor: "#6EBFBB",
+    marginTop: 16,
+    width: '25%'
+  }
 });
 
