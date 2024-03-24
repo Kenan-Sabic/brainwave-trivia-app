@@ -2,7 +2,6 @@ import React from 'react'
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
-
 export default function LoginScreen  () {
   const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
@@ -19,6 +18,7 @@ export default function LoginScreen  () {
 
   return (
     <View style={styles.container} >
+   
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
         <View style={styles.innerContainer}>
         <View style={styles.inputForm}>
@@ -28,14 +28,19 @@ export default function LoginScreen  () {
           <Text style={styles.loginMessage}>Log Into your account</Text>
           <TextInput value="User Name" style={styles.inputField}></TextInput>
           <TextInput value="Password" style={styles.inputField}></TextInput>
-          <Pressable onPress={() => navigation.navigate('Leaderboard')} style={styles.loginButton}><Text style={styles.loginText}>Log In</Text></Pressable>
+          <Pressable onPress={() => navigation.navigate('PlayMenu')} style={styles.loginButton}><Text style={styles.loginText}>Log In</Text></Pressable>
+          <Pressable onPress={() => navigation.navigate('PlayMenu')} style={styles.loginButton}><Text style={styles.loginText}>Play as guest</Text></Pressable>
+            <View style={styles.signup}>
+            <Text style={styles.signupText}>Don't have an account?</Text>
+            <Pressable><Text style={styles.signupPressable} onPress={() => navigation.navigate('Register')}>Sign up</Text></Pressable>
+            </View>
           </View>
         </View>
       </ImageBackground>
     </View>
     
-  )
-}
+  );
+};
 
 const {width,height}= Dimensions.get('window');
 const isLargeScreen = width>=768;
@@ -58,12 +63,12 @@ const styles = StyleSheet.create({
 
   },
   inputForm:{
-    Maxwidth:800,
-    flex:isLargeScreen ? 'column':1,
+    Maxwidth:1000,
     alignItems:'center',
-    backgroundColor:isLargeScreen ? 'rgba(100,100,100,0.4)':'none',
-    borderRadius:5,
+    backgroundColor:isLargeScreen ? 'rgba(75,143,140,0.6)':'none',
+    borderRadius:10,
     padding:isLargeScreen ? 30: 0,
+    paddingHorizontal:isLargeScreen ? 60: 0,
   },
   background: {
     height: '100%',
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize:18
   },
   inputField:{
-    backgroundColor:"#6EBFBB",
+    backgroundColor:"rgba(250,250,250,0.6)",
     padding:20,
     width:"calc(100%+60px)",
     margin:5,
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
     fontFamily:"Orbitron-Bold",
   },
   loginButton:{
-    marginTop:30,
+    marginTop:15,
     backgroundColor:"#6EBFBB",
     width:"90%",
     padding:10,
@@ -110,5 +115,23 @@ const styles = StyleSheet.create({
     width:"100%",
     fontFamily:"Orbitron-Bold",
     fontSize:20
+  },
+  signup:{
+    flex:1,
+    flexDirection:'row',
+    paddingTop:15,
+    
+  },
+  signupText:{
+    fontFamily:"Orbitron-Bold",
+    fontSize:18,
+    color:'black',
+    paddingRight:5
+  },
+  signupPressable:{
+    fontFamily:"Orbitron-Bold",
+    fontSize:18,
+    color:'white',
+    
   }
 })
