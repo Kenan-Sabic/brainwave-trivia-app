@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
 
 export default function LoginScreen  () {
   const navigation = useNavigation();
@@ -20,13 +20,16 @@ export default function LoginScreen  () {
   return (
     <View style={styles.container} >
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-        <View style={styles.container}>
+        <View style={styles.innerContainer}>
+        <View style={styles.inputForm}>
           <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  />
           <Text style={styles.title}>Brainwave</Text>
+          
           <Text style={styles.loginMessage}>Log Into your account</Text>
           <TextInput value="User Name" style={styles.inputField}></TextInput>
           <TextInput value="Password" style={styles.inputField}></TextInput>
           <Pressable onPress={() => navigation.navigate('Leaderboard')} style={styles.loginButton}><Text style={styles.loginText}>Log In</Text></Pressable>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -34,13 +37,33 @@ export default function LoginScreen  () {
   )
 }
 
+const {width,height}= Dimensions.get('window');
+const isLargeScreen = width>=768;
+
 const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    paddingTop:30,
-    alignItems: 'center',
+    paddingTop:0,
 
+
+
+  },
+  innerContainer:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    paddingTop:20,
+    
+
+  },
+  inputForm:{
+    Maxwidth:800,
+    flex:isLargeScreen ? 'column':1,
+    alignItems:'center',
+    backgroundColor:isLargeScreen ? 'rgba(100,100,100,0.4)':'none',
+    borderRadius:5,
+    padding:isLargeScreen ? 30: 0,
   },
   background: {
     height: '100%',
@@ -65,7 +88,7 @@ const styles = StyleSheet.create({
   inputField:{
     backgroundColor:"#6EBFBB",
     padding:20,
-    width:"80%",
+    width:"calc(100%+60px)",
     margin:5,
     borderRadius:10,
     textAlign:"center",
