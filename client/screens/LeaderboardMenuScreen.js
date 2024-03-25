@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal, Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
@@ -23,9 +23,18 @@ export default function LeaderBoardMenuScreen () {
   return (
     <View style={styles.container}>
      <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
+      <ScrollView showsVerticalScrollIndicator={false}>
     <View style={[styles.container2, screenWidth > 800 && styles.container2Desktop]}>
       {screenWidth <= 800 && (<Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
-        <Text style={styles.title}>BRAINWAVE</Text>
+       {screenWidth <= 800 && (<Text style={styles.title1}>BRAINWAVE</Text>)}
+       {screenWidth > 800 && (<View style={styles.header}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image source={require('./assets/images/brain.svg')} style={styles.brain}/>
+          <Text style={styles.title1Desk}>BRAINWAVE</Text>
+        </View>
+        <Text style={styles.title2Desk}>Leaderboards</Text>
+       </View>)}
+       
         <View style={styles.buttonsContainer}>
         <TouchableOpacity style={[styles.button1, screenWidth > 800 && styles.button1Desktop]} >
             <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('PlayMenu')}>Play</Text>
@@ -139,6 +148,7 @@ export default function LeaderBoardMenuScreen () {
           </View>
         </View>
       </View>
+      </ScrollView>
      </ImageBackground>
     </View>
     
@@ -158,14 +168,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     top: 0,
-    marginTop: 50
+    // marginTop: 50
   },
   container2Desktop: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
     top: 0,
-    marginTop: 15
   },
   background: {
     height: '100%',
@@ -177,7 +186,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
 
   },
-  title:{
+  title1:{
     fontSize:55,
     fontFamily: 'Monofett-Regular'
   },
@@ -333,10 +342,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: 'Orbitron-Bold'
   },
-  modalButtonsContainer: {
-
-    
-  },
   modalButton: {
     borderRadius: 15,
     padding: 10,
@@ -369,6 +374,26 @@ const styles = StyleSheet.create({
     backgroundColor: "#6EBFBB",
     marginTop: 16,
     width: '25%'
-  }
+  },
+  header: {
+    flexDirection: 'row',
+    width: '100%',
+    backgroundColor: '#4B8F8C',
+    marginBottom: 50,
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  title1Desk: {
+    color: 'white',
+    fontSize:55,
+    fontFamily: 'Monofett-Regular'
+  },
+  title2Desk: {
+    fontSize: 55,
+    color: 'white',
+    marginRight: 30,
+    fontWeight: 'bold'
+  },
+  
 });
 
