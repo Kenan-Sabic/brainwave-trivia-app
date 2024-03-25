@@ -5,15 +5,17 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function GameOverScreen() {
+  
+  const navigation = useNavigation();
+
   let [fontsLoaded] = useFonts({
-    
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
   });
   if (!fontsLoaded) {
     return null;
   }
-  const navigation = useNavigation();
+
 
   return (
     <View>

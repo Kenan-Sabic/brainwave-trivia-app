@@ -1,10 +1,25 @@
 import React from 'react'
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image, TextInput } from 'react-native';
 
 export default function LoginScreen  () {
 
+  const navigation = useNavigation();
+
+  handleLogin = () => {
+    // Implement your login logic here, e.g., call an authentication API
+    const { email, password } = this.state;
+
+    // Example: Check if the email and password are valid
+    if (email && password) {
+      // Successfully logged in, navigate to the next screen
+      this.props.navigation.navigate('MainStackNavigator', {screen: 'HomeScreen'});
+    } else {
+      // Handle login failure, show an error message
+      alert('Invalid email or password. Please try again.');
+    }
+  }
   let [fontsLoaded] = useFonts({
     
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
@@ -13,19 +28,16 @@ export default function LoginScreen  () {
   if (!fontsLoaded) {
     return null;
   }
-  const navigation = useNavigation();
-
-
 
   return (
-    <View >
+    <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-        <View style={styles.container}>
+        <View style={styles.container2}>
           <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  />
-          <Text style={styles.title}>Brainwave</Text>
+          <Text style={styles.title}>BRAINWAVE</Text>
           <Text style={styles.loginMessage}>Log Into your account</Text>
-          <TextInput value="User Name" style={styles.inputField}></TextInput>
-          <TextInput value="Password" style={styles.inputField}></TextInput>
+          <TextInput style={styles.inputField}  placeholder="Username"></TextInput>
+          <TextInput style={styles.inputField}  placeholder="Password" secureTextEntry></TextInput>
         
         </View>
       </ImageBackground>
@@ -38,19 +50,25 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    paddingTop:30,
     alignItems: 'center',
-
+    justifyContent: 'center'
+  },
+  container2: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    top: 0,
+    marginTop: 50
   },
   background: {
-    height: '100%',
     width: '100%',
+    height: '100%',
   },
-  logoBanner:{
+  logoBanner: {
     flex:0,
     width:325,
     height:140,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
   title:{
     padding:10,
@@ -72,6 +90,7 @@ const styles = StyleSheet.create({
     color:"black",
     fontSize:24,
     fontFamily:"Orbitron-Bold",
+    opacity: 0.7, 
   },
   
 })
