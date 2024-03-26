@@ -303,6 +303,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderRadius: 15,
+    marginBottom: 30
   },
   leaderboardText: {
     fontSize: 25,
