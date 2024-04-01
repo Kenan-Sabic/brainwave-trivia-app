@@ -30,6 +30,7 @@ export default function RegisterScreen() {
           <View style={[styles.input1, isLargeScreen && styles.input2]}>
             <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />
             <Text style={styles.title}>BRAINWAVE</Text>
+             {/* navbar components above. rest layout of the screen.*/}
             <Text style={styles.loginMessage}>Create Your Account</Text>
             <TextInput 
               placeholder="Username" 
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   },
   input1: { //for phoneadapt 
     alignItems: 'center',
-    backgroundColor: 'rgba(75,143,140,0.15)',
+    backgroundColor: 'rgba(75,143,140,0.2)',
     borderRadius: 11,
     padding: 18,
   },

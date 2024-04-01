@@ -2,6 +2,7 @@ import React from 'react'
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
+import HeaderLargeScreen from './components/HeaderLargeScreen';
 export default function LoginScreen  () {
   const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
@@ -20,6 +21,7 @@ export default function LoginScreen  () {
     <View style={styles.container} >
    
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
+        <HeaderLargeScreen></HeaderLargeScreen>
         <View style={styles.innerContainer}>
         <View style={styles.inputForm}>
           <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  />
