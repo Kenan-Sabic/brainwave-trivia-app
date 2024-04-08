@@ -34,6 +34,7 @@ export default function LeaderBoardMenuScreen () {
         </View>
         <Text style={styles.title2Desk}>Leaderboards</Text>
        </View>)}
+      
        
         <View style={styles.buttonsContainer}>
         <TouchableOpacity style={[styles.button1, screenWidth > 800 && styles.button1Desktop]} >
