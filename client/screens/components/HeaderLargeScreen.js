@@ -16,10 +16,10 @@ export default function HeaderLargeScreen (){
       }
 
     return(
-        <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor:'#6EBFBB'}}>
+        <View style={styles.header}>
         <Image source={require('../assets/images/brain.svg')}/>
         <Text style={styles.title1Desk}>BRAINWAVE</Text>
-        <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Register')}>Home</Text></Pressable>
+        <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Welcome')}>Home</Text></Pressable>
       </View>
 
 
@@ -43,7 +43,11 @@ const styles = StyleSheet.create({
         fontFamily:'Orbitron-Bold',
         fontSize:25,
    
-      }
+      },
+      header:{flexDirection: 'row', 
+      alignItems: 'center',
+       backgroundColor:'#6EBFBB',
+      display:isLargeScreen ? 'flex' : 'none'},
 
 
 })

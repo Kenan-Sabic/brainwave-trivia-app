@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+import HeaderLargeScreen from './components/HeaderLargeScreen';
 
 
 export default function WelcomeScreen () {
@@ -19,6 +20,7 @@ export default function WelcomeScreen () {
 
   return (
     <View style={styles.container}>
+      <HeaderLargeScreen></HeaderLargeScreen>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
       <View style={styles.container2}>
         <View style={styles.logo}>

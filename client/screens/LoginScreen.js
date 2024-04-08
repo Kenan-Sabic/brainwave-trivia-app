@@ -28,7 +28,7 @@ export default function LoginScreen  () {
           <Text style={styles.title}>Brainwave</Text>
           
           <Text style={styles.loginMessage}>Log Into your account</Text>
-          <TextInput value="User Name" style={styles.inputField}></TextInput>
+          <TextInput value="Username" style={styles.inputField}></TextInput>
           <TextInput value="Password" style={styles.inputField}></TextInput>
           <Pressable onPress={() => navigation.navigate('PlayMenu')} style={styles.loginButton}><Text style={styles.loginText}>Log In</Text></Pressable>
           <Pressable onPress={() => navigation.navigate('PlayMenu')} style={styles.loginButton}><Text style={styles.loginText}>Play as guest</Text></Pressable>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'center',
-    paddingTop:20,
+    paddingTop:40,
     
 
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   inputField:{
     backgroundColor:"rgba(250,250,250,0.6)",
     padding:20,
-    width:"calc(100%+60px)",
+    width:'100%',
     margin:5,
     borderRadius:10,
     textAlign:"center",

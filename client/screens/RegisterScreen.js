@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import HeaderLargeScreen from './components/HeaderLargeScreen';
 
 export default function RegisterScreen() {
 
@@ -25,6 +26,7 @@ export default function RegisterScreen() {
 
   return (
     <View style={styles.container}>
+      <HeaderLargeScreen></HeaderLargeScreen>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
         <View style={styles.container2}>
           <View style={[styles.input1, isLargeScreen && styles.input2]}>

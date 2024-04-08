@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-
+import HeaderLargeScreen from './components/HeaderLargeScreen';
 
 export default function GameOverScreen() {
   
@@ -19,6 +19,7 @@ export default function GameOverScreen() {
 
   return (
     <View>
+      <HeaderLargeScreen></HeaderLargeScreen>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
         <View style={styles.container}>
 
