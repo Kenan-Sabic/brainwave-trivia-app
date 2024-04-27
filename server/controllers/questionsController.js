@@ -1,10 +1,22 @@
 // controllers/questionsController.js
 const questions = [
-    { id: 1, question: 'What is the capital of France?', answer: 'Paris' },
-    { id: 2, question: 'Who wrote Hamlet?', answer: 'William Shakespeare' },
-    // Add more questions here
+    // Placeholder questions data
 ];
 
-exports.getQuestions = (req, res) => {
-    res.json(questions);
+exports.getTrueFalseQuestions = (req, res) => {
+    // Logic to filter true/false questions
+    const trueFalseQuestions = questions.filter(question => question.type === 'true_false');
+    res.json(trueFalseQuestions);
+};
+
+exports.getMultipleChoiceQuestions = (req, res) => {
+    // Logic to filter multiple-choice questions
+    const multipleChoiceQuestions = questions.filter(question => question.type === 'multiple_choice');
+    res.json(multipleChoiceQuestions);
+};
+
+exports.getFillBlankQuestions = (req, res) => {
+    // Logic to filter fill-in-the-blank questions
+    const fillBlankQuestions = questions.filter(question => question.type === 'fill_blank');
+    res.json(fillBlankQuestions);
 };
