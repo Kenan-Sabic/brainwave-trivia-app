@@ -20,6 +20,8 @@ export default function HeaderLargeScreen (){
         <Image source={require('../assets/images/brain.svg')}/>
         <Text style={styles.title1Desk}>BRAINWAVE</Text>
         <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Welcome')}>Home</Text></Pressable>
+        <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Leaderboard')}>Leaderboard</Text></Pressable>
+        <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Info')}>Info</Text></Pressable>
       </View>
 
 

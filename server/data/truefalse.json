@@ -1,0 +1,21 @@
+[
+    {
+        "id": 1,
+        "question": "The Earth is flat.",
+        "type": "true_false",
+        "answer": true
+    },
+    {
+        "id": 2,
+        "question": "Water boils at 100 degrees Celsius.",
+        "type": "true_false",
+        "answer": true
+    },
+    {
+        "id": 3,
+        "question": "The capital of France is Berlin.",
+        "type": "true_false",
+        "answer": false
+    }
+
+]

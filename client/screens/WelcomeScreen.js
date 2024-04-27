@@ -20,8 +20,8 @@ export default function WelcomeScreen () {
 
   return (
     <View style={styles.container}>
-      <HeaderLargeScreen></HeaderLargeScreen>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
+      <HeaderLargeScreen></HeaderLargeScreen>
       <View style={styles.container2}>
         <View style={styles.logo}>
         <Image source={require('./assets/images/Logo.png')}></Image>

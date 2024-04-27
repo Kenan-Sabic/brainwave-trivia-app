@@ -1,22 +1,28 @@
 // controllers/questionsController.js
-const questions = [
-    // Placeholder questions data
-];
+const path = require('path');
+const fs = require('fs');
 
+// Function to read questions from JSON file
+function readQuestionsFromFile(fileName) {
+    const filePath = path.join(__dirname, '..', 'data', fileName);
+    const rawData = fs.readFileSync(filePath);
+    return JSON.parse(rawData);
+}
+
+// Get true/false questions
 exports.getTrueFalseQuestions = (req, res) => {
-    // Logic to filter true/false questions
-    const trueFalseQuestions = questions.filter(question => question.type === 'true_false');
+    const trueFalseQuestions = readQuestionsFromFile('truefalse.json');
     res.json(trueFalseQuestions);
 };
 
+// Get multiple-choice questions
 exports.getMultipleChoiceQuestions = (req, res) => {
-    // Logic to filter multiple-choice questions
-    const multipleChoiceQuestions = questions.filter(question => question.type === 'multiple_choice');
+    const multipleChoiceQuestions = readQuestionsFromFile('multiplechoice.json');
     res.json(multipleChoiceQuestions);
 };
 
+// Get fill-in-the-blank questions
 exports.getFillBlankQuestions = (req, res) => {
-    // Logic to filter fill-in-the-blank questions
-    const fillBlankQuestions = questions.filter(question => question.type === 'fill_blank');
+    const fillBlankQuestions = readQuestionsFromFile('fillblank.json');
     res.json(fillBlankQuestions);
 };

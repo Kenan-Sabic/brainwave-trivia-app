@@ -8,6 +8,7 @@ import LeaderBoardMenuScreen from './screens/LeaderboardMenuScreen';
 import QuizMCQScreen from './screens/QuizMCQScreen';
 import QuizTFScreen from './screens/QuizTFScreen';
 import GameOverScreen from './screens/GameOverScreen';
+import InfoScreen from './screens/Info';
 
 
 
@@ -25,6 +26,7 @@ function AppNavigator() {
             <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false}} />
             <Stack.Screen name="QuizTF" component={QuizTFScreen} options={{headerShown: false}} />
             <Stack.Screen name="GameOver" component={GameOverScreen}  options={{headerShown: false}}/>
+            <Stack.Screen name="Info" component={InfoScreen}  options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }

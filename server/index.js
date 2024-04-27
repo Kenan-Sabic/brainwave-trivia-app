@@ -10,12 +10,12 @@ app.use(express.json());
 app.use('/api', apiRoutes);
 
 // Serve static files for the web app
-app.use(express.static(path.join(__dirname, 'build')));
+//app.use(express.static(path.join(__dirname, 'build')));
 
 // Catch-all route for serving the React app
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+//app.get('*', (req, res) => {
+ //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//}); 
 
 // Start the server
 const PORT = process.env.PORT || 8000;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal, Dimensions, ScrollView, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
@@ -37,10 +37,10 @@ export default function LeaderBoardMenuScreen () {
       
        
         <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={[styles.button1, screenWidth > 800 && styles.button1Desktop]} >
+        <TouchableOpacity style={[styles.button1, screenWidth > 800 && styles.button1Desktop]} onPress={() => navigation.navigate('PlayMenu')} >
             <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('PlayMenu')}>Play</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button2, screenWidth > 800 && styles.button2Desktop]}>
+          <TouchableOpacity style={[styles.button2, screenWidth > 800 && styles.button2Desktop]} onPress={() => navigation.navigate('Leaderboard')}>
             <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('Leaderboard')}>Leaderboard</Text>
           </TouchableOpacity>
         </View>
