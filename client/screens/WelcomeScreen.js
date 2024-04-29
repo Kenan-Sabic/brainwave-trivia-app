@@ -31,11 +31,11 @@ export default function WelcomeScreen () {
           <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]} onPress={() => navigation.navigate('Login')}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]}>
+          <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]} onPress={() => navigation.navigate('Register')}>
             <Text style={styles.buttonText} onPress={() => navigation.navigate('Register')}>Sign up</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]} onPress={() => navigation.navigate('PlayMenu')}>
-            <Text style={styles.buttonText}>Play as guest</Text>
+            <Text style={styles.buttonText} onPress={() => navigation.navigate('PlayMenu')}>Play as guest</Text>
           </TouchableOpacity>
         </View>
         {screenWidth <= 800 && (
