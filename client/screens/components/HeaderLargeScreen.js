@@ -37,19 +37,19 @@ const styles = StyleSheet.create({
     title1Desk: {
         color: 'white',
         fontSize:55,
-        fontFamily: 'Monofett-Regular'
+        fontFamily: 'Monofett-Regular',
       },
       navigationPressable:{
         marginHorizontal:5,
         color:'white',
         fontFamily:'Orbitron-Bold',
         fontSize:25,
-   
       },
       header:{flexDirection: 'row', 
       alignItems: 'center',
-       backgroundColor:'#6EBFBB',
-      display:isLargeScreen ? 'flex' : 'none'},
+       backgroundColor:'rgba(110,191,187,0.7)',
+      display:isLargeScreen ? 'flex' : 'none',
+    },
 
 
 })
