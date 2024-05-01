@@ -1,76 +1,76 @@
 // controllers/playerController.js
-const fs = require('fs');
-const path = require('path');
+const Player = require('../models/Player');
 
-// Function to read player data from the JSON file
-function readPlayersFromFile() {
-    const filePath = path.join(__dirname, '..', 'data', 'players.json');
-    const rawData = fs.readFileSync(filePath);
-    return JSON.parse(rawData);
-}
 
-// Function to write player data to the JSON file
-function writePlayersToFile(players) {
-    const filePath = path.join(__dirname, '..', 'data', 'players.json');
-    fs.writeFileSync(filePath, JSON.stringify(players, null, 2));
-}
+
+// Get all players
+exports.getAllPlayers = async (req, res) => {
+    try {
+        const players = await Player.find();
+        res.status(200).json(players);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
 // Create a new player
-exports.createPlayer = (req, res) => {
-    const { name } = req.body;
-    const players = readPlayersFromFile();
-
-    // Generate a unique player ID
-    const id = Math.random().toString(36).substr(2, 9);
-
-    const newPlayer = { id, name, score: 0 };
-    players.push(newPlayer);
-    writePlayersToFile(players);
-
-    res.json(newPlayer);
+exports.createPlayer = async (req, res) => {
+    const { username } = req.body;
+    try {
+        const existingPlayer = await Player.findOne({ username });
+        if (existingPlayer) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+        const newPlayer = await Player.create({ username });
+        res.status(201).json(newPlayer);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
 // Get player by ID
-exports.getPlayerById = (req, res) => {
+exports.getPlayerById = async (req, res) => {
     const playerId = req.params.id;
-    const players = readPlayersFromFile();
-
-    const player = players.find(player => player.id === playerId);
-    if (!player) {
-        return res.status(404).json({ error: 'Player not found' });
+    try {
+        const player = await Player.findById(playerId);
+        if (!player) {
+            return res.status(404).json({ error: 'Player not found' });
+        }
+        res.json(player);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-
-    res.json(player);
 };
 
 // Update player by ID
-exports.updatePlayerById = (req, res) => {
+exports.updatePlayerById = async (req, res) => {
     const playerId = req.params.id;
-    const { name, score } = req.body;
-    const players = readPlayersFromFile();
-
-    const playerIndex = players.findIndex(player => player.id === playerId);
-    if (playerIndex === -1) {
-        return res.status(404).json({ error: 'Player not found' });
+    const { username, trueFalseScore, multipleChoiceScore, fillBlankScore } = req.body;
+    try {
+        const updatedPlayer = await Player.findByIdAndUpdate(
+            playerId,
+            { username, 'scores.trueFalseScore': trueFalseScore, 'scores.multipleChoiceScore': multipleChoiceScore, 'scores.fillBlankScore': fillBlankScore },
+            { new: true }
+        );
+        if (!updatedPlayer) {
+            return res.status(404).json({ error: 'Player not found' });
+        }
+        res.json(updatedPlayer);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-
-    players[playerIndex] = { ...players[playerIndex], name, score };
-    writePlayersToFile(players);
-
-    res.json(players[playerIndex]);
 };
 
 // Delete player by ID
-exports.deletePlayerById = (req, res) => {
+exports.deletePlayerById = async (req, res) => {
     const playerId = req.params.id;
-    const players = readPlayersFromFile();
-
-    const updatedPlayers = players.filter(player => player.id !== playerId);
-    if (players.length === updatedPlayers.length) {
-        return res.status(404).json({ error: 'Player not found' });
+    try {
+        const deletedPlayer = await Player.findByIdAndDelete(playerId);
+        if (!deletedPlayer) {
+            return res.status(404).json({ error: 'Player not found' });
+        }
+        res.status(204).end();
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-
-    writePlayersToFile(updatedPlayers);
-
-    res.json({ message: 'Player deleted successfully' });
 };
