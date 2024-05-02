@@ -1,4 +1,5 @@
 const MultipleChoiceQuestion = require('../models/MultipleChoiceQuestion');
+//library for easier array operations we use it to get random questions from the database
 const _ = require('lodash');
 
 

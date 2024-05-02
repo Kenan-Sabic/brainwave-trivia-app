@@ -49,8 +49,8 @@ app.use('/auth', authRoutes);
 app.use('/api/players', playerRoutes);
 
 //Questions Routes
+app.use('/api/questions/truefalse', trueFalseRoutes);
 app.use('/api/questions/multiple-choice', multipleChoiceRoutes);
-app.use('/api/questions/true-false', trueFalseRoutes);
 app.use('/api/questions/fill-blank', fillBlankRoutes);
 
 //Leaderboard routes

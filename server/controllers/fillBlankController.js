@@ -1,5 +1,5 @@
-
 const FillBlankQuestion = require('../models/FillBlankQuestion');
+//library for easier array operations we use it to get random questions from the databasevazi
 const _ = require('lodash');
 
 // Get a specified number of random fill in the blank questions
