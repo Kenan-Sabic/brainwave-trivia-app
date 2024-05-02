@@ -50,8 +50,8 @@ app.use('/api/players', playerRoutes);
 
 //Questions Routes
 app.use('/api/questions/truefalse', trueFalseRoutes);
-app.use('/api/questions/multiple-choice', multipleChoiceRoutes);
-app.use('/api/questions/fill-blank', fillBlankRoutes);
+app.use('/api/questions/multiplechoice', multipleChoiceRoutes);
+app.use('/api/questions/fillblank', fillBlankRoutes);
 
 //Leaderboard routes
 app.use('/api/leaderboard', leaderboardRoutes);
