@@ -25,11 +25,7 @@ export default function HeaderLargeScreen ({title}){
           <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Info')}>Info</Text></Pressable>
           <Text style={styles.title2}>{title}</Text>
         </View>
-
-
     )
-
-
 }
 
 
