@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 
 
-export default function ButtonWeb () {
+export default function ButtonWeb ({opacity}) {
 
     const navigation = useNavigation();
 
@@ -19,7 +19,7 @@ export default function ButtonWeb () {
 
     return(
         <View>
-            <Pressable style={styles.button} onPress={() => navigation.navigate('PlayMenu')}><Text style={styles.buttonText}>Play</Text></Pressable>
+            <Pressable style={[styles.button, {opacity: opacity}]} onPress={() => navigation.navigate('PlayMenu')}><Text style={styles.buttonText}>Play</Text></Pressable>
         </View>
     )
 }

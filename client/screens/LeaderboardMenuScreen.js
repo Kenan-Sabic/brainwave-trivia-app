@@ -3,13 +3,17 @@ import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
+
+//Components
+
+//Web components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';
 import LeaderWithButtons from './components/web/leaderboard components/LeaderWithButtons';
 import PlayNavButton from './components/web/PlayNavButton';
 import LeaderNavButton from './components/web/LeaderNavButton';
 
-
-import ButtonMobile from './components/mobile/ButtonMobile';
+//Mobile components
+import LeaderboardMobile from './components/mobile/leaderboard components mobile/LeaderboardMobile';
 import PlayNavButtonMobile from './components/mobile/PlayNavButtonMobile';
 import LeaderNavButtonMobile from './components/mobile/LeaderNavButtonMobile';
 
@@ -18,8 +22,6 @@ export default function LeaderBoardMenuScreen () {
   
   const navigation = useNavigation();
   const screenWidth = Dimensions.get('window').width;
-
-  const [modalVisible, setModalVisible] = useState(false);
 
   let [fontsLoaded] = useFonts({
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
@@ -33,57 +35,7 @@ export default function LeaderBoardMenuScreen () {
     <View style={styles.container}>
      <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
       <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.container2}>
-       {screenWidth <= 800 && (<Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
-       {screenWidth <= 800 && (<Text style={styles.title1}>BRAINWAVE</Text>)}
-       {screenWidth <= 800 && (
-          <TouchableOpacity style={styles.button3}>
-            <Text style={styles.buttonText} onPress={() => setModalVisible(true)}>Question type</Text>
-        </TouchableOpacity>
-        )}
 
-        {screenWidth <= 800 && (
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          
-          onRequestClose={() => setModalVisible(false) }
-        >
-          <TouchableOpacity  style={styles.modalContainer} onPress={() => setModalVisible(false)}>
-          
-          <View style={styles.modalContent}>
-            <View style={styles.modalButtonsContainer}>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text style={styles.modalButtonText}>Multiple choice</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={() => navigation.navigate("Login")}
-              >
-                <Text style={styles.modalButtonText}>True/False</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton}
-                // onPress={() => navigation.navigate("Login")}
-              >
-                <Text style={styles.modalButtonText}>Fill in the blank</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton}
-                // onPress={() => navigation.navigate("Login")}
-              >
-                <Text style={styles.modalButtonText}>Mixed questions</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          
-          </TouchableOpacity>
-        </Modal>
-        )}
         {screenWidth > 800 && (
         
         //THIS IS THE WEB VIEW
@@ -98,8 +50,24 @@ export default function LeaderBoardMenuScreen () {
           </View>
           <LeaderWithButtons></LeaderWithButtons>
           </View>
-        )}        
-      </View>
+        )}
+
+        {screenWidth <= 800 && (
+        
+        //THIS IS MOBILE VIEW
+
+        <View style={styles.container2}>
+
+          <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}/> 
+          <Text style={styles.title1}>BRAINWAVE</Text>
+          <View style={styles.buttonsContainer}>
+            <PlayNavButtonMobile opacity={0.7}></PlayNavButtonMobile>
+            <LeaderNavButtonMobile opacity={1}></LeaderNavButtonMobile>
+          </View>
+            <LeaderboardMobile></LeaderboardMobile>
+        </View>
+       )} 
+
       </ScrollView>
      </ImageBackground>
     </View>
@@ -146,131 +114,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 32
-  },
-  button1: {
-    height: 50,
-    width: 150,
-    marginHorizontal: 8,
-    backgroundColor: 'rgba(110, 191, 187, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    borderBottomStartRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button2: {
-    height: 50,
-    width: 150,
-    marginHorizontal: 8,
-    backgroundColor: '#6EBFBB',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    borderBottomEndRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-
-
-  button3: {
-    height: 40,
-    width: 316,
-    marginTop: 32,
-    backgroundColor: '#6EBFBB',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  buttonText: {
-    fontSize: 20,
-    fontFamily: 'Orbitron-Bold'
-  },
-  leaderboard: {
-    backgroundColor: '#6EBFBB',
-    width: 316,
-    paddingBottom: 20,
-    marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderRadius: 15
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    width: 316,
-    alignSelf: 'center',
-  },
-  modalContent: {
-    backgroundColor: "#6EBFBB",
-    borderRadius: 10,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    justifyContent: "center",
-    paddingHorizontal: 5
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 20,
-    textAlign: "center",
-    fontFamily: 'Orbitron-Bold'
-  },
-  modalButton: {
-    borderRadius: 15,
-    padding: 10,
-    marginVertical: 8,
-    alignItems: "center",
-    backgroundColor: "#6EBFBB",
-    width: 316,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalButtonText: {
-    color: "black",
-    fontSize: 15,
-    fontFamily: 'Orbitron-Bold',
-  },
-
-  title1Desk: {
-    color: 'white',
-    fontSize:55,
-    fontFamily: 'Monofett-Regular'
   },
 });
 

@@ -17,9 +17,7 @@ export default function LeaderSelectButton ({title}) {
       }
     return(
         <View style={styles.container}>
-                <Pressable
-                    style={[styles.button]}
-                >
+                <Pressable style={styles.button}>
                     <Text style={styles.buttonText}>{title}</Text>
                 </Pressable>       
         </View>

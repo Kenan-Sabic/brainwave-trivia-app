@@ -22,10 +22,6 @@ export default function ButtonWeb ({title, screen}) {
             <Pressable style={styles.button} onPress={() => navigation.navigate(screen)}><Text style={styles.buttonText}>{title}</Text></Pressable>
         </View>
     )
-//            <TouchableOpacity style={[styles.button, screenWidth > 800 && styles.buttonDesktop]} >
-//   <Text style={[styles.buttonText, screenWidth > 800 && styles.buttonTextDesktop]} onPress={() => navigation.navigate('QuizMCQ')}>Multiple Choice</Text>
-//  </TouchableOpacity>
-
 }
 
 const styles = StyleSheet.create({

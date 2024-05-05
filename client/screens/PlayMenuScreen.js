@@ -66,8 +66,8 @@ export default function PlayMenuScreen() {
         {screenWidth <= 800 && (
             <View>
               <View style={styles.buttonsContainer}>
-                <PlayNavButtonMobile></PlayNavButtonMobile>
-                <LeaderNavButtonMobile></LeaderNavButtonMobile>
+                <PlayNavButtonMobile opacity={1}></PlayNavButtonMobile>
+                <LeaderNavButtonMobile opacity={0.7}></LeaderNavButtonMobile>
               </View>
               <View style={styles.questionsContainer}>
                 <ButtonMobile screen='QuizMCQ' title="Multiple choice"></ButtonMobile>

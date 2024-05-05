@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 
 
-export default function ButtonWeb () {
+export default function ButtonWeb ({opacity}) {
 
     const navigation = useNavigation();
 
@@ -19,7 +19,7 @@ export default function ButtonWeb () {
 
     return(
         <View>
-            <Pressable style={styles.button} onPress={() => navigation.navigate('Leaderboard')}><Text style={styles.buttonText}>Leaderboard</Text></Pressable>
+            <Pressable style={[styles.button, {opacity: opacity}]} onPress={() => navigation.navigate('Leaderboard')}><Text style={styles.buttonText}>Leaderboard</Text></Pressable>
         </View>
     )
 }
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         height: 50,
         width: 150,
         marginHorizontal: 8,
-        backgroundColor: 'rgba(110, 191, 187, 0.5)',
+        backgroundColor: 'rgb(110, 191, 187)',
         justifyContent: 'center',
         alignItems: 'center',
         borderTopLeftRadius: 15,
