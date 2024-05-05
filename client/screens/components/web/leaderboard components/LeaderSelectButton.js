@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, StyleSheet, Pressable  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 
 
-export default function LeaderSelectButton ({title, screen}) {
+export default function LeaderSelectButton ({title}) {
 
     const navigation = useNavigation();
-
     let [fontsLoaded] = useFonts({
     
         'Orbitron-Bold': require('../../../assets/fonts/Orbitron-Bold.ttf'),
@@ -16,32 +15,13 @@ export default function LeaderSelectButton ({title, screen}) {
       if (!fontsLoaded) {
         return null;
       }
-
     return(
         <View style={styles.container}>
                 <Pressable
-                    style={styles.button}
-                    onPress={() => navigation.navigate('Login')}
+                    style={[styles.button]}
                 >
-                    <Text style={styles.buttonText}>Multiple choice</Text>
-                </Pressable>
-                <Pressable
-                    style={styles.button}
-                    onPress={() => navigation.navigate("Login")}
-                >
-                    <Text style={styles.buttonText}>True/False</Text>
-                </Pressable>
-                <Pressable
-                    style={styles.button}
-                    onPress={() => navigation.navigate("Login")}
-                >
-                    <Text style={styles.buttonText}>Fill in the blank</Text>
-                </Pressable>
-            <Pressable style={styles.button}
-                onPress={() => navigation.navigate("Login")}
-            >
-                <Text style={styles.buttonText}>Mixed questions</Text>
-            </Pressable>        
+                    <Text style={styles.buttonText}>{title}</Text>
+                </Pressable>       
         </View>
     )
 }
@@ -49,15 +29,15 @@ export default function LeaderSelectButton ({title, screen}) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        width: 1000,
+        width: 250,
     },
     button: {
         borderRadius: 15,
         padding: 10,
         alignItems: "center",
-        backgroundColor: "#6EBFBB",
         marginTop: 16,
-        width: '25%'
+        width: '100%',
+        backgroundColor: 'rgb(110, 191, 187)',
     },
     buttonText: {
         fontSize: 15,

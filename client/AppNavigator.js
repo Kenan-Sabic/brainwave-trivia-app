@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 
 function AppNavigator() {
     return (
-        <Stack.Navigator initialRouteName='PlayMenu'>
+        <Stack.Navigator initialRouteName='Leaderboard'>
             <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false}} />
             <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false,
             presentation: 'card', animationTypeForReplace: 'push', animation:'simple_push'}} />

@@ -9,6 +9,11 @@ import PlayNavButton from './components/web/PlayNavButton';
 import LeaderNavButton from './components/web/LeaderNavButton';
 
 
+import ButtonMobile from './components/mobile/ButtonMobile';
+import PlayNavButtonMobile from './components/mobile/PlayNavButtonMobile';
+import LeaderNavButtonMobile from './components/mobile/LeaderNavButtonMobile';
+
+
 export default function LeaderBoardMenuScreen () {
   
   const navigation = useNavigation();
@@ -31,8 +36,7 @@ export default function LeaderBoardMenuScreen () {
       <View style={styles.container2}>
        {screenWidth <= 800 && (<Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
        {screenWidth <= 800 && (<Text style={styles.title1}>BRAINWAVE</Text>)}
-     
-        {screenWidth <= 800 && (
+       {screenWidth <= 800 && (
           <TouchableOpacity style={styles.button3}>
             <Text style={styles.buttonText} onPress={() => setModalVisible(true)}>Question type</Text>
         </TouchableOpacity>
@@ -80,12 +84,17 @@ export default function LeaderBoardMenuScreen () {
           </TouchableOpacity>
         </Modal>
         )}
-        {screenWidth > 800 && (<HeaderLargeScreen title="Leaderboard"></HeaderLargeScreen>)}
+        {screenWidth > 800 && (
+        
+        //THIS IS THE WEB VIEW
+
+        <HeaderLargeScreen title="Leaderboard"></HeaderLargeScreen>)}
+        
         {screenWidth > 800 && (
           <View style={styles.container2Desktop}>
           <View style={styles.buttonsContainer}>
-          <PlayNavButton></PlayNavButton>
-          <LeaderNavButton></LeaderNavButton>
+          <PlayNavButton opacity={0.7}></PlayNavButton>
+          <LeaderNavButton opacity={1}></LeaderNavButton>
           </View>
           <LeaderWithButtons></LeaderWithButtons>
           </View>
@@ -111,7 +120,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     top: 0,
-    // marginTop: 50
   },
   container2Desktop: {
     flex: 1,

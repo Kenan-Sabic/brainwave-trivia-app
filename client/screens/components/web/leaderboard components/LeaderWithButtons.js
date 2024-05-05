@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Image, StyleSheet, Pressable  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -6,7 +6,6 @@ import LeaderSelectButton from './LeaderSelectButton';
 
 
 export default function LeaderWithButtons (){
-    const navigation = useNavigation();
 
     let [fontsLoaded] = useFonts({
     
@@ -16,9 +15,16 @@ export default function LeaderWithButtons (){
       if (!fontsLoaded) {
         return null;
       }
+
     return(
         <View style={styles.leaderboard}>
-            <LeaderSelectButton></LeaderSelectButton>
+            <View style={{flexDirection: 'row'}}>
+            <LeaderSelectButton title={'Multiple choice'}></LeaderSelectButton>
+            <LeaderSelectButton title={'FIll in the blank'}></LeaderSelectButton>
+            <LeaderSelectButton title={'True/False'}></LeaderSelectButton>
+            <LeaderSelectButton title={'Mixed questions'}></LeaderSelectButton>
+            </View>
+
             <View style={styles.leaderboardDesktop}>
                 <View>
                     <Text style={styles.leaderboardText}>Username</Text>

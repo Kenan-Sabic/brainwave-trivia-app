@@ -33,12 +33,17 @@ export default function PlayMenuScreen() {
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
       
      
-      {screenWidth > 800 && (<HeaderLargeScreen title="Play modes"></HeaderLargeScreen>)}
+      {screenWidth > 800 && (
+
+      //THIS IS THE WEB VIEW
+      
+      <HeaderLargeScreen title="Play modes"></HeaderLargeScreen>)}
+      
       {screenWidth > 800 && ( 
           <View style={styles.container2Desktop}> 
             <View style={styles.buttonsContainer}>
-              <PlayNavButton></PlayNavButton>
-              <LeaderNavButton></LeaderNavButton>
+              <PlayNavButton opacity={1}></PlayNavButton>
+              <LeaderNavButton opacity={0.7}></LeaderNavButton>
             </View>     
             <View style={styles.questionsContainer}>
               <ButtonWeb screen='QuizMCQ' title="Multiple choice"></ButtonWeb>
@@ -48,11 +53,16 @@ export default function PlayMenuScreen() {
             </View>
           </View>
       )}
-
+      
       <View style={styles.container2}>
-        {screenWidth <= 800 && (<Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
-        {screenWidth <= 800 && (<Text style={styles.title1}>BRAINWAVE</Text>)}
         
+        {screenWidth <= 800 && (
+        
+        //THIS IS THE MOBILE VIEW
+
+        <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
+        
+        {screenWidth <= 800 && (<Text style={styles.title1}>BRAINWAVE</Text>)}
         {screenWidth <= 800 && (
             <View>
               <View style={styles.buttonsContainer}>
