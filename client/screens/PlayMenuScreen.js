@@ -40,7 +40,7 @@ export default function PlayMenuScreen() {
       <HeaderLargeScreen title="Play modes"></HeaderLargeScreen>)}
       
       {screenWidth > 800 && ( 
-          <View style={styles.container2Desktop}> 
+          <View style={styles.container2}> 
             <View style={styles.buttonsContainer}>
               <PlayNavButton opacity={1}></PlayNavButton>
               <LeaderNavButton opacity={0.7}></LeaderNavButton>
@@ -91,12 +91,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   container2: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    top: 0,
-  },
-  container2Desktop: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
