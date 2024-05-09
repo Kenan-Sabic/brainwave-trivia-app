@@ -20,9 +20,10 @@ export default function HeaderLargeScreen ({title}){
         <View style={styles.header}>
           <Image source={require('../../assets/images/brain.svg')}/>
           <Text style={styles.title1}>BRAINWAVE</Text>
-          <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Welcome')}>Home</Text></Pressable>
+          <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('PlayMenu')}>Home</Text></Pressable>
           <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Leaderboard')}>Leaderboard</Text></Pressable>
           <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Info')}>Info</Text></Pressable>
+          <Pressable><Text style={styles.navigationPressable}  onPress={() => navigation.navigate('Welcome')}>Log out</Text></Pressable>
           <Text style={styles.title2}>{title}</Text>
         </View>
     )
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         fontSize:40,
       },
       navigationPressable:{
-        marginLeft:15,
+        marginHorizontal: 15,
         color:'white',
         fontFamily:'Orbitron-Bold',
         fontSize:25,
