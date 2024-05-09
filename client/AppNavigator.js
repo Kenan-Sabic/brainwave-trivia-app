@@ -1,5 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+//Screens
+
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
@@ -8,27 +11,23 @@ import LeaderBoardMenuScreen from './screens/LeaderboardMenuScreen';
 import QuizMCQScreen from './screens/QuizMCQScreen';
 import QuizTFScreen from './screens/QuizTFScreen';
 import GameOverScreen from './screens/GameOverScreen';
-import InfoScreen from './screens/Info';
-
-
+import AboutScreen from './screens/About';
 
 const Stack = createNativeStackNavigator();
 
-function AppNavigator() {
+export default function AppNavigator() {
     return (
-        <Stack.Navigator initialRouteName='Welcome'>
-            <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false}} />
-            <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false,
-            presentation: 'card', animationTypeForReplace: 'push', animation:'simple_push'}} />
-            <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false, presentation: 'card', animationTypeForReplace: 'push',animation: 'simple_push'}} />
-            <Stack.Screen name="PlayMenu" component={PlayMenuScreen}  options={{headerShown: false}}/>
-            <Stack.Screen name="Leaderboard" component={LeaderBoardMenuScreen} options={{headerShown: false}} />
-            <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false}} />
-            <Stack.Screen name="QuizTF" component={QuizTFScreen} options={{headerShown: false}} />
-            <Stack.Screen name="GameOver" component={GameOverScreen}  options={{headerShown: false}}/>
-            <Stack.Screen name="Info" component={InfoScreen}  options={{headerShown: false}}/>
+        <Stack.Navigator initialRouteName='Info'>
+            <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false, animation: 'default'}} />
+            <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false, animation: 'default'}} />
+            <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false, animation: 'default'}} />
+            <Stack.Screen name="PlayMenu" component={PlayMenuScreen}  options={{headerShown: false, animation: 'default'}}/>
+            <Stack.Screen name="Leaderboard" component={LeaderBoardMenuScreen} options={{headerShown: false, animation: 'default'}} />
+            <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false, animation: 'default'}} />
+            <Stack.Screen name="QuizTF" component={QuizTFScreen} options={{headerShown: false, animation: 'default'}} />
+            <Stack.Screen name="GameOver" component={GameOverScreen}  options={{headerShown: false, animation: 'default'}}/>
+            <Stack.Screen name="About" component={AboutScreen}  options={{headerShown: false, animation: 'default'}}/>
         </Stack.Navigator>
     )
 }
 
-export default AppNavigator;
