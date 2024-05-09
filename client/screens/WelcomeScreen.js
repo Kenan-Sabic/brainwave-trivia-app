@@ -1,9 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View, ImageBackground, Image, Dimensions, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
+
+//Components
+
+//Web components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';
-import ButtonMobile from './components/mobile/ButtonMobile'
 import ButtonWeb from './components/web/ButtonWeb';
+
+//Mobile components
+import ButtonMobile from './components/mobile/ButtonMobile'
 
 export default function WelcomeScreen () {
   const screenWidth = Dimensions.get('window').width;

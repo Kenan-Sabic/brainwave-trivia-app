@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
       header:{
         flexDirection: 'row', 
         alignItems: 'center',
-        backgroundColor:'rgba(110,191,187,0.7)',
+        backgroundColor: 'rgba(110, 191, 187, 0.7)',
         width: '100%',
-        marginBottom: 30
+        marginBottom: 20
       },
 
 

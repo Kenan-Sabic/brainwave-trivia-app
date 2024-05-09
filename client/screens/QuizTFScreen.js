@@ -1,6 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
+
+//Components
+
+//Web components
+import HeaderLargeScreen from './components/web/HeaderLargeScreen';
+import AnswerOption from './components/web/quiz question components/AnswerOption';
+import QuestionBox from './components/web/quiz question components/QuestionBox';
+import QuestionNumber from './components/web/quiz question components/QuestionNumber';
+import SubmitAnswer from './components/web/quiz question components/SubmitAnswer';
+
+//Mobile components
+
+import AnswerOptionMobile from './components/mobile/quiz question components/AnswerOptionMobile';
+import QuestionBoxMobile from './components/mobile/quiz question components/QuestionBoxMobile';
+import QuestionNumberMobile from './components/mobile/quiz question components/QuestionNumberMobile';
+import SubmitAnswerMobile from './components/mobile/quiz question components/SubmitAnswerMobile';
 
 export default function QuizTFScreen() {
   const screenWidth = Dimensions.get('window').width;
@@ -18,45 +34,49 @@ export default function QuizTFScreen() {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-        <View style={styles.layer}>
-          <View style={[styles.container2, screenWidth > 800 && styles.container2Desktop]}>
-            {screenWidth <= 800 && <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />}
-            {screenWidth <= 800 && <Text style={styles.title1}>BRAINWAVE</Text>}
+        <View style={styles.layer}>            
+            
             {screenWidth > 800 && (
-              <View style={styles.header}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={require('./assets/images/brain.svg')} style={styles.brain} />
-                  <Text style={styles.title1Desktop}>BRAINWAVE</Text>
+            
+              //THIS IS THE WEB VIEW
+             
+              <HeaderLargeScreen title={'MCQ Quiz'}></HeaderLargeScreen>
+            
+            )}
+            {screenWidth > 800 && (
+              <View style={styles.container2}>
+                <QuestionNumber question={'Question 22'}></QuestionNumber>
+                <QuestionBox question={'The capital of China is Beijing.'}></QuestionBox>
+                <View style={styles.buttons}>
+                  <AnswerOption answer={'True'}></AnswerOption>
+                  <AnswerOption answer={'False'}></AnswerOption>
                 </View>
-                <Text style={styles.title2Desktop}>T/F Questions</Text>
+                  <SubmitAnswer></SubmitAnswer>
               </View>
             )}
 
-           {/* <Text style={styles.questionText}>Question 22</Text>*/}
 
-            <View style={styles.modalContainer}>
-            <Text style={styles.questionText}>Question 22</Text>
-              <View style={styles.modalContainer2}>
-                <Text style={styles.modalText}>Example of question: Albert Einstein was awarded the Nobel Prize in Physics in 1921.</Text>
+            {screenWidth <= 800 && (
+
+              //THIS IS MOBILE VIEW
+
+              <View style={styles.container2}>
+                <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}/>
+                <Text style={styles.title1}>BRAINWAVE</Text>
+                <QuestionNumberMobile question={'Question 22'}></QuestionNumberMobile>
+                <QuestionBoxMobile question={'The capital of China is Beijing'}></QuestionBoxMobile>
+                <View style={styles.buttonsMobile}>
+                  <AnswerOptionMobile answer={'True'}></AnswerOptionMobile>
+                  <AnswerOptionMobile answer={'False'}></AnswerOptionMobile>
+                </View>
+                <SubmitAnswerMobile></SubmitAnswerMobile>
               </View>
-              <View style={styles.buttons}>
-                <TouchableOpacity style={styles.TFButton}>
-                  <Text style={styles.buttonText}>True</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.TFButton}>
-                  <Text style={styles.buttonText}>False</Text>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity style={[styles.submitButton, styles.buttons]}>
-                <Text style={styles.submitText}>Submit Answer</Text>
-              </TouchableOpacity>
-            </View>
+            )}
           </View>
-        </View>
       </ImageBackground>
     </View>
   );
-}
+} 
 
 const styles = StyleSheet.create({
   container: {
@@ -68,21 +88,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    top: 0,
-  },
-  container2Desktop: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    top: 0,
+    marginTop: 40,
   },
   background: {
     height: '100%',
     width: '100%',
   },
-  layer: {
+  layer: { 
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', //over backgorun for questtions 
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   logoBanner: {
     width: 325,
@@ -93,107 +107,17 @@ const styles = StyleSheet.create({
     fontSize: 55,
     fontFamily: 'Monofett-Regular',
   },
-  header: {
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: '#4B8F8C',
-    marginBottom:55,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  brain: {
-    width: 70, 
-    height: 70, 
-  },
-  title1Desktop: {
-    color: 'white',
-    fontSize: 55,
-    fontFamily: 'Monofett-Regular',
-  },
-  title2Desktop: {
-    fontSize: 55,
-    color: 'white',
-    marginRight: 30,
-    fontWeight: 'bold',
-  },
-  questionText: {
-    padding: 20,
-    backgroundColor: 'rgba(110, 191, 187, 0.5)',
-    color: 'white',
-    fontSize: 20,
-    borderRadius: 20,
-    fontFamily: 'Orbitron-Bold',
-    fontWeight: '10',
-    marginBottom: 10,
-   // marginTop:50, 
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  modalContainer2: {
-    backgroundColor: "rgba(110, 191, 187, 0.5)",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 0,
-    textAlign: "center",
-    fontFamily: 'Orbitron-Bold',
-  },
   buttons: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%', 
-    marginTop: 20,
+    justifyContent: 'space-between',
+    width: 1100,
+    marginTop: 10
   },
- 
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-    fontFamily: 'Orbitron-Bold',
-  },
- 
-  
-  buttonsContainer: {
+  buttonsMobile: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     width: '100%',
-    marginTop: 20,
-  },
-  TFButton: {
-    backgroundColor: 'rgba(75, 143, 140,1)',
-    flex: 1,
-    margin: 10,
-    borderRadius: 20,
-    padding: 22,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  submitButton: {
-    backgroundColor: 'rgba(75, 143, 140, 1)',
-    padding: 20,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
- 
-  submitText: {
-    color: 'white',
-    fontSize: 20,
-    fontFamily: 'Orbitron-Bold',
+    marginTop: 10,
+    paddingHorizontal: 8
   },
 });

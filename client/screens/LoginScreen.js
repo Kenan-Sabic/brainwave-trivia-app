@@ -2,10 +2,15 @@ import React, {useState}from 'react'
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, StyleSheet, Text, View, ImageBackground, Image, TextInput, Dimensions } from 'react-native';
+
+//Components
+
+//Web components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';
-import ButtonMobile from './components/mobile/ButtonMobile'
 import ButtonWeb from './components/web/ButtonWeb';
 
+//Mobile components
+import ButtonMobile from './components/mobile/ButtonMobile'
 
 export default function LoginScreen  () {
   const screenWidth = Dimensions.get('window').width;
@@ -42,13 +47,13 @@ export default function LoginScreen  () {
             <TextInput
                placeholder="Username" 
                value={username} 
-               onChangeText={setUsername} //navigating backend will be easier this wayy 
+               onChangeText={setUsername}
                style={styles.inputField} 
             />
             <TextInput
                placeholder="Password" 
                value={password} 
-               onChangeText={setPassword} //navigating backend will be easier this wayy 
+               onChangeText={setPassword}
                style={styles.inputField}
                secureTextEntry={true}
             />
@@ -75,13 +80,13 @@ export default function LoginScreen  () {
               <TextInput
                 placeholder="Username" 
                 value={username} 
-                onChangeText={setUsername} //navigating backend will be easier this wayy 
+                onChangeText={setUsername}
                 style={styles.inputFieldMobile} 
               />
               <TextInput
                 placeholder="Password" 
                 value={password} 
-                onChangeText={setPassword} //navigating backend will be easier this wayy 
+                onChangeText={setPassword}
                 style={styles.inputFieldMobile}
                 secureTextEntry={true}
               />

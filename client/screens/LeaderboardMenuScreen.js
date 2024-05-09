@@ -1,8 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Modal, Dimensions, ScrollView, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, ScrollView } from 'react-native';
 import { useFonts } from 'expo-font';
-import { useState } from 'react';
 
 //Components
 
@@ -20,7 +18,6 @@ import LeaderNavButtonMobile from './components/mobile/LeaderNavButtonMobile';
 
 export default function LeaderBoardMenuScreen () {
   
-  const navigation = useNavigation();
   const screenWidth = Dimensions.get('window').width;
 
   let [fontsLoaded] = useFonts({
@@ -43,7 +40,7 @@ export default function LeaderBoardMenuScreen () {
         <HeaderLargeScreen title="Leaderboard"></HeaderLargeScreen>)}
         
         {screenWidth > 800 && (
-          <View style={styles.container2Desktop}>
+          <View style={styles.container2}>
           <View style={styles.buttonsContainer}>
           <PlayNavButton opacity={0.7}></PlayNavButton>
           <LeaderNavButton opacity={1}></LeaderNavButton>
@@ -84,12 +81,6 @@ const styles = StyleSheet.create({
 
   },
   container2: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    top: 0,
-  },
-  container2Desktop: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',

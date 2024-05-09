@@ -1,11 +1,15 @@
 import React, {useState}from 'react'
 import { useFonts } from 'expo-font';
-import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, ImageBackground, Image, TextInput, Dimensions } from 'react-native';
+
+//Components
+
+//Web components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';
-import ButtonMobile from './components/mobile/ButtonMobile'
 import ButtonWeb from './components/web/ButtonWeb';
 
+//Mobile components
+import ButtonMobile from './components/mobile/ButtonMobile'
 
 export default function RegisterScreen  () {
   const screenWidth = Dimensions.get('window').width;
@@ -13,8 +17,6 @@ export default function RegisterScreen  () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState ('')
-
-  const navigation = useNavigation();
   
   let [fontsLoaded] = useFonts({
     
@@ -43,20 +45,20 @@ export default function RegisterScreen  () {
             <TextInput
                placeholder="Username" 
                value={username} 
-               onChangeText={setUsername} //navigating backend will be easier this wayy 
+               onChangeText={setUsername}
                style={styles.inputField} 
             />
             <TextInput
                placeholder="Password" 
                value={password} 
-               onChangeText={setPassword} //navigating backend will be easier this wayy 
+               onChangeText={setPassword}
                style={styles.inputField}
                secureTextEntry={true}
             />
             <TextInput
                placeholder="Confirm Password" 
                value={confirmPassword} 
-               onChangeText={setConfirmPassword} //navigating backend will be easier this wayy 
+               onChangeText={setConfirmPassword}
                style={styles.inputField}
                secureTextEntry={true}
             />
@@ -182,19 +184,4 @@ const styles = StyleSheet.create({
     fontFamily: "Orbitron-Bold",
     opacity: 0.7, 
   },
-  signup:{
-    flex:1,
-    flexDirection:'row',
-    paddingTop: 20    
-  },
-  signupText:{
-    fontFamily: "Orbitron-Bold",
-    fontSize: 18,
-    paddingRight:5
-  },
-  signupPressable:{
-    fontFamily: "Orbitron-Bold",
-    fontSize: 18,
-    color: 'white',
-  }
 })
