@@ -43,7 +43,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use(express.json());
 
 //Authentication routes, Also known as User routes
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
 //Player routes
 app.use('/api/players', playerRoutes);
