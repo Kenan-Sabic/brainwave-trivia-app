@@ -7,8 +7,8 @@ export default function AboutScreen(){
 
     let [fontsLoaded] = useFonts({
     
-        'Orbitron-Bold': require('../../assets/fonts/Orbitron-Bold.ttf'),
-        'Monofett-Regular': require('../../assets/fonts/Monofett-Regular.ttf'),
+        //'Orbitron-Bold': require('../../assets/fonts/Orbitron-Bold.ttf'),
+        'Monofett-Regular': require('../screens/assets/fonts/Monofett-Regular.ttf'),
       });
       if (!fontsLoaded) {
         return null;

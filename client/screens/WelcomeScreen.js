@@ -39,7 +39,7 @@ export default function WelcomeScreen () {
             <Text style={styles.titleWeb}>Welcome to Brainwave</Text>
             <ButtonWeb title={'Login'} screen={'Login'}></ButtonWeb>
             <ButtonWeb title={'Sign up'} screen={'Register'}></ButtonWeb>
-            <ButtonWeb title={'Play as guest'} screen={'PlayMenu'}></ButtonWeb>
+            <ButtonWeb title={'Play as guest'} screen={'Nickname'}></ButtonWeb>
           </View>
         )}
 
