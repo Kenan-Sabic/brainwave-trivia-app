@@ -19,7 +19,6 @@ router.put('/:id', verifyToken, authorizePlayer, playerController.updatePlayerBy
 // Delete player by ID
 router.delete('/:id', verifyToken, authorizePlayer, playerController.deletePlayerById);
 
-// Route to update player scores
-router.put('/scores/:id', verifyToken, playerController.updatePlayerScores);
+
 
 module.exports = router;

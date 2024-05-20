@@ -4,7 +4,7 @@ const User = require('../models/User');
 // Get all players
 exports.getAllPlayers = async (req, res) => {
     try {
-        const players = await Player.find().populate('user', 'username');
+        const players = await Player.find().populate('user', 'name');
         res.status(200).json(players);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -13,36 +13,29 @@ exports.getAllPlayers = async (req, res) => {
 
 // Create a new player
 exports.createPlayer = async (req, res) => {
-    const { userId, name } = req.body;
+    const { name, userId } = req.body;
+
+    if (!name || !userId) {
+        return res.status(400).json({ error: 'Name and userId are required' });
+    }
 
     try {
-        // Check if the user exists
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
+        const existingPlayerByName = await Player.findOne({ name });
+        if (existingPlayerByName) {
+            return res.status(400).json({ error: 'Name already exists' });
         }
 
-        // Check if the player already exists for this user
-        const existingPlayer = await Player.findOne({ user: userId });
-        if (existingPlayer) {
-            return res.status(400).json({ error: 'Player already exists for this user' });
+        const existingPlayerByUser = await Player.findOne({ user: userId });
+        if (existingPlayerByUser) {
+            return res.status(400).json({ error: 'User already has a player' });
         }
 
-        // Create a new player
-        const newPlayer = new Player({
-            user: userId,
-            name,
-            scores: {
-                trueFalseScore: 0,
-                multipleChoiceScore: 0,
-                fillBlankScore: 0
-            }
-        });
-
+        const newPlayer = new Player({ name, user: userId });
+        console.log('New player:', newPlayer); // Debugging log
         await newPlayer.save();
-
         res.status(201).json(newPlayer);
     } catch (error) {
+        console.error('Error:', error); // Debugging log
         res.status(500).json({ error: error.message });
     }
 };
@@ -51,7 +44,7 @@ exports.createPlayer = async (req, res) => {
 exports.getPlayerById = async (req, res) => {
     const playerId = req.params.id;
     try {
-        const player = await Player.findById(playerId).populate('user', 'username');
+        const player = await Player.findById(playerId).populate('user', 'name');
         if (!player) {
             return res.status(404).json({ error: 'Player not found' });
         }
@@ -64,22 +57,27 @@ exports.getPlayerById = async (req, res) => {
 // Update player by ID
 exports.updatePlayerById = async (req, res) => {
     const playerId = req.params.id;
-    const { name, trueFalseScore, multipleChoiceScore, fillBlankScore } = req.body;
+    const { trueFalseScore, multipleChoiceScore, fillBlankScore } = req.body;
+
     try {
-        const updatedPlayer = await Player.findByIdAndUpdate(
-            playerId,
-            {
-                name,
-                'scores.trueFalseScore': trueFalseScore,
-                'scores.multipleChoiceScore': multipleChoiceScore,
-                'scores.fillBlankScore': fillBlankScore
-            },
-            { new: true }
-        );
-        if (!updatedPlayer) {
+        const player = await Player.findById(playerId);
+        if (!player) {
             return res.status(404).json({ error: 'Player not found' });
         }
-        res.json(updatedPlayer);
+
+        // Only update scores if the new score is higher than the existing score
+        if (trueFalseScore !== undefined && trueFalseScore > player.scores.trueFalseScore) {
+            player.scores.trueFalseScore = trueFalseScore;
+        }
+        if (multipleChoiceScore !== undefined && multipleChoiceScore > player.scores.multipleChoiceScore) {
+            player.scores.multipleChoiceScore = multipleChoiceScore;
+        }
+        if (fillBlankScore !== undefined && fillBlankScore > player.scores.fillBlankScore) {
+            player.scores.fillBlankScore = fillBlankScore;
+        }
+
+        await player.save();
+        res.json(player);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -94,41 +92,6 @@ exports.deletePlayerById = async (req, res) => {
             return res.status(404).json({ error: 'Player not found' });
         }
         res.status(204).end();
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-
-// Update player scores
-exports.updatePlayerScores = async (req, res) => {
-    const playerId = req.params.id;
-    const { trueFalseScore, multipleChoiceScore, fillBlankScore } = req.body;
-    try {
-        const player = await Player.findById(playerId);
-
-        if (!player) {
-            return res.status(404).json({ error: 'Player not found' });
-        }
-
-        // Ensure the user updating the score is the owner of the player
-        if (player.user.toString() !== req.user.id) {
-            return res.status(403).json({ error: 'Forbidden: You are not allowed to update this player' });
-        }
-
-        // Update scores only if they are higher than the existing scores
-        if (trueFalseScore !== undefined && trueFalseScore > player.scores.trueFalseScore) {
-            player.scores.trueFalseScore = trueFalseScore;
-        }
-        if (multipleChoiceScore !== undefined && multipleChoiceScore > player.scores.multipleChoiceScore) {
-            player.scores.multipleChoiceScore = multipleChoiceScore;
-        }
-        if (fillBlankScore !== undefined && fillBlankScore > player.scores.fillBlankScore) {
-            player.scores.fillBlankScore = fillBlankScore;
-        }
-
-        await player.save();
-        res.status(200).json(player);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
