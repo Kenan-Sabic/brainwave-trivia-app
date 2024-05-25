@@ -27,51 +27,33 @@ export const loginUser = async (userData) => {
   }
 };
 
-// Players
-export const createPlayer = async (playerData) => {
-    try {
-      const response = await apiService.post('/players', playerData);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
-  
-  export const getPlayerById = async (id) => {
-    try {
-      const response = await apiService.get(`/players/${id}`);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
-  
-  export const getAllPlayers = async () => {
-    try {
-      const response = await apiService.get('/players');
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
-  
-  export const updatePlayerById = async (id, playerData) => {
-    try {
-      const response = await apiService.put(`/players/${id}`, playerData);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
-  
-  export const deletePlayerById = async (id) => {
-    try {
-      const response = await apiService.delete(`/players/${id}`);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
+// Users
+export const getUserById = async (id) => {
+  try {
+    const response = await apiService.get(`/users/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const updateUserById = async (id, userData) => {
+  try {
+    const response = await apiService.put(`/users/${id}`, userData);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const deleteUserById = async (id) => {
+  try {
+    const response = await apiService.delete(`/users/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
 
 // Questions - Multiple Choice
 export const createMultipleChoiceQuestion = async (questionData) => {
@@ -220,3 +202,93 @@ export const getLeaderboardByGameMode = async (gameMode) => {
     throw error.response.data;
   }
 };
+
+export default apiService;
+
+/*
+EXAMPLES OF USAGE, TOO LAZY TO ACTUALLY IMPLEMENT STUFF ON FRONTEND
+
+#####REGISTERING A USER
+const newUser = { username: 'testuser', password: 'password123' };
+registerUser(newUser).then(data => {
+  console.log('User registered:', data);
+}).catch(error => {
+  console.error('Error registering user:', error);
+});
+
+
+#####LOGIN USER
+const userCredentials = { username: 'testuser', password: 'password123' };
+loginUser(userCredentials).then(data => {
+  console.log('User logged in:', data);
+}).catch(error => {
+  console.error('Error logging in user:', error);
+});
+
+####GET USER BY ID
+const userId = 'userIdHere';
+getUserById(userId).then(data => {
+  console.log('User data:', data);
+}).catch(error => {
+  console.error('Error fetching user data:', error);
+});
+
+#####UPDATE USER BY ID (SCORE UPDATE)
+const userId = 'userIdHere';
+const updatedUserData = { trueFalseScore: 50, multipleChoiceScore: 75, fillBlankScore: 100 };
+updateUserById(userId, updatedUserData).then(data => {
+  console.log('Updated user data:', data);
+}).catch(error => {
+  console.error('Error updating user data:', error);
+});
+
+####DELETE USER BY ID
+const userId = 'userIdHere';
+deleteUserById(userId).then(data => {
+  console.log('User deleted:', data);
+}).catch(error => {
+  console.error('Error deleting user:', error);
+});
+
+#####CREATE MULTIPLE CHOICE  QUESTIONS
+const newQuestion = {
+  question: 'What is the capital of France?',
+  options: ['Paris', 'London', 'Berlin', 'Rome'],
+  answer: 'Paris'
+};
+
+createMultipleChoiceQuestion(newQuestion).then(data => {
+  console.log('Multiple choice question created:', data);
+}).catch(error => {
+  console.error('Error creating multiple choice question:', error);
+});
+
+####GET MCQ BY ID
+const questionId = 'questionIdHere';
+
+getMultipleChoiceQuestion(questionId).then(data => {
+  console.log('Multiple choice question data:', data);
+}).catch(error => {
+  console.error('Error fetching multiple choice question:', error);
+});
+
+#####GET 5 RANDOM MCQ
+const count = 5;
+
+getRandomMultipleChoiceQuestions(count).then(data => {
+  console.log('Random multiple choice questions:', data);
+}).catch(error => {
+  console.error('Error fetching random multiple choice questions:', error);
+});
+
+####GET TRUE FALSE LEADERBOARD (options are truefalse, multiplechoice and fillblank)
+const gameMode = 'truefalse'; 
+
+getLeaderboardByGameMode(gameMode).then(data => {
+  console.log('Leaderboard for game mode:', gameMode, data);
+}).catch(error => {
+  console.error('Error fetching leaderboard:', error);
+});
+
+
+*/
