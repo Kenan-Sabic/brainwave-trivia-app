@@ -1,4 +1,5 @@
 import axios from 'axios';
+import useStore from '../useStore';
 
 // Set your server base URL
 const BASE_URL = 'http://localhost:8000/api';
@@ -11,6 +12,8 @@ const apiService = axios.create({
 // User Authentication
 export const registerUser = async (userData) => {
   try {
+    useStore.getState().setUser(response.data.user);
+    useStore.getState().setToken(response.data.token);
     const response = await apiService.post('/auth/register', userData);
     return response.data;
   } catch (error) {
@@ -21,6 +24,8 @@ export const registerUser = async (userData) => {
 export const loginUser = async (userData) => {
   try {
     const response = await apiService.post('/auth/login', userData);
+    useStore.getState().setUser(response.data.user);
+    useStore.getState().setToken(response.data.token);
     return response.data;
   } catch (error) {
     throw error.response.data;
