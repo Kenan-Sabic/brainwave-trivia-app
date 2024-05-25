@@ -7,8 +7,8 @@ const express = require('express');
 const path = require('path');
 //User register and login routes
 const authRoutes = require('./routes/authRoutes')
-//Player routes, not same as user but related in one to one relationship in database
-const playerRoutes = require('./routes/playerRoutes');
+//User routes for updating scores and whatnot
+const userRoutes = require('./routes/userRoutes')
 //question routes
 const  multipleChoiceRoutes = require('./routes/questions/multipleChoiceRoutes');
 const trueFalseRoutes = require('./routes/questions/trueFalseRoutes');
@@ -45,8 +45,8 @@ app.use(express.json());
 //Authentication routes, Also known as User routes
 app.use('/api/auth', authRoutes);
 
-//Player routes
-app.use('/api/players', playerRoutes);
+//User routes
+app.use('/api/users', userRoutes);
 
 //Questions Routes
 app.use('/api/questions/truefalse', trueFalseRoutes);
