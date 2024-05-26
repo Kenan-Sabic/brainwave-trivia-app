@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
     return (
-        <Stack.Navigator initialRouteName='Info'>
+        <Stack.Navigator initialRouteName='GameOver'>
             <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false, animation: 'default'}} />

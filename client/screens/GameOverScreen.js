@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
+import HeaderLargeScreen from './components/web/HeaderLargeScreen';
+import ButtonWeb from './components/web/ButtonWeb';
 
 export default function QuizMCQScreen() {
   const screenWidth = Dimensions.get('window').width;
@@ -19,32 +21,26 @@ export default function QuizMCQScreen() {
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
         <View style={styles.layer}>
-          <View style={[styles.container2, screenWidth > 800 && styles.container2Desktop]}>
             {screenWidth <= 800 && <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />}
             {screenWidth <= 800 && <Text style={styles.title1}>BRAINWAVE</Text>}
-            {screenWidth > 800 && (
-              <View style={styles.header}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={require('./assets/images/brain.svg')} style={styles.brain} />
-                  <Text style={styles.title1Desktop}>BRAINWAVE</Text>
-                </View>
-                <Text style={styles.title2Desktop}>MCQ Questions</Text>
-              </View>
-            )}
-
-{/* will need to adapt navbar accross the app */}
            
+           
+            {screenWidth > 800 && (
+              <HeaderLargeScreen title={'Game over'}></HeaderLargeScreen>
+            )}   
 
-        <View style={styles.modalContainer}>
-             <View style={styles.modalContainer2}>
-                <Text style={styles.modalText}> GAME OVER </Text>
+
+            {screenWidth > 800 && (
+              <View style={styles.container2}>
+                  <View style={styles.modalContainer}>
+                    <View style={styles.modalContainer2}>
+                      <Text style={styles.modalText}> GAME OVER </Text>
+                    </View>
+                    <ButtonWeb title={'Return to home'} screen={'PlayMenu'}></ButtonWeb>
+                  </View>
               </View>
-              <TouchableOpacity style={[styles.returnButton, styles.button]}>
-                <Text style={styles.returnText}> Return to home </Text>
-              </TouchableOpacity>
-            </View>
+            )}      
           </View>
-        </View>
       </ImageBackground>
     </View>
   );
@@ -60,6 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop: 40,
   },
   container2Desktop: {
     flex: 1,
@@ -115,8 +112,8 @@ const styles = StyleSheet.create({
     width:'50%',
   },
   modalContainer2: {
-    width:'100%',
-    backgroundColor: "rgba(201, 122, 19, 0.8)", //need to check colour of the sand to match 
+    width:616,
+    backgroundColor: "rgba(255, 230, 179, 0.8)", //need to check colour of the sand to match 
     borderRadius: 20,
     padding: 40,
     alignItems: "center",
@@ -131,7 +128,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   modalText: {
-    fontSize: 18,
+    fontSize: 30,
     textAlign: "center",
     fontFamily: 'Orbitron-Bold',
   },
