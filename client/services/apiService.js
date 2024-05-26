@@ -102,12 +102,14 @@ export const deleteMultipleChoiceQuestion = async (id) => {
 
 export const getRandomMultipleChoiceQuestions = async (count) => {
   try {
-    const response = await apiService.get('/questions/multiplechoice/random', { params: { count } });
+    const response = await apiService.get(`/questions/multiplechoice/random/${count}`);
     return response.data;
   } catch (error) {
     throw error.response.data;
   }
 };
+
+
 
 // Questions - True/False 
 export const createTrueFalseQuestion = async (questionData) => {

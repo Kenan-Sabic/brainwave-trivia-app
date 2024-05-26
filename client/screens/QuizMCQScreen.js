@@ -1,90 +1,107 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
+import { getRandomMultipleChoiceQuestions } from '../services/apiService';  // Ensure the path is correct
 
-//Components
-
-//Web components
-import HeaderLargeScreen from './components/web/HeaderLargeScreen';
-import AnswerOption from './components/web/quiz question components/AnswerOption';
-import QuestionBox from './components/web/quiz question components/QuestionBox';
-import QuestionNumber from './components/web/quiz question components/QuestionNumber';
-import SubmitAnswer from './components/web/quiz question components/SubmitAnswer';
-
-//Mobile components
-
-import AnswerOptionMobile from './components/mobile/quiz question components/AnswerOptionMobile';
-import QuestionBoxMobile from './components/mobile/quiz question components/QuestionBoxMobile';
-import QuestionNumberMobile from './components/mobile/quiz question components/QuestionNumberMobile';
-import SubmitAnswerMobile from './components/mobile/quiz question components/SubmitAnswerMobile';
-
+// Components
+import HeaderLargeScreen from './components/web/HeaderLargeScreen';  
+import AnswerOption from './components/web/quiz question components/AnswerOption';  
+import QuestionBox from './components/web/quiz question components/QuestionBox';  
+import QuestionNumber from './components/web/quiz question components/QuestionNumber';  
+import SubmitAnswer from './components/web/quiz question components/SubmitAnswer';  
+import AnswerOptionMobile from './components/mobile/quiz question components/AnswerOptionMobile';  
+import QuestionBoxMobile from './components/mobile/quiz question components/QuestionBoxMobile';  
+import QuestionNumberMobile from './components/mobile/quiz question components/QuestionNumberMobile';  
+import SubmitAnswerMobile from './components/mobile/quiz question components/SubmitAnswerMobile';  
+// same thing with ids and numbers of questions 
 export default function QuizMCQScreen() {
   const screenWidth = Dimensions.get('window').width;
-  
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [error, setError] = useState(null);
 
-  let [fontsLoaded] = useFonts({
-    'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
-    'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
+  const [fontsLoaded] = useFonts({
+    'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),  
+    'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),  
   });
 
-  if (!fontsLoaded) {
-    return null;
+  useEffect(() => {
+    async function fetchQuestions() {
+      try {
+        const response = await getRandomMultipleChoiceQuestions(1);
+        setQuestions(response);
+        setCurrentQuestion(response[0]);
+      } catch (error) {
+        setError(error);
+        console.error('Error fetching questions:', error);
+      }
+    }
+
+    fetchQuestions();
+  }, []);
+
+  if (error) {
+    return <Text>Error: {error.message}</Text>;
+  }
+
+  if (!fontsLoaded || !currentQuestion) {
+    return <Text>Loading...</Text>;  
   }
 
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-        <View style={styles.layer}>            
-            
-            {screenWidth > 800 && (
-            
-              //THIS IS THE WEB VIEW
-             
-              <HeaderLargeScreen title={'MCQ Quiz'}></HeaderLargeScreen>
-            
-            )}
-            {screenWidth > 800 && (
+        <View style={styles.layer}>
+          {screenWidth > 800 && (
+            <>
+              <HeaderLargeScreen title={'MCQ Quiz'} />
               <View style={styles.container2}>
-                <QuestionNumber question={'Question 22'}></QuestionNumber>
-                <QuestionBox question={'Which element is known as the "building block of life" due to its essential role in forming organic compounds?'}></QuestionBox>
+                <QuestionNumber question={`Question ${currentQuestion._id}`} />
+                <QuestionBox question={currentQuestion.text} />
                 <View style={styles.buttons}>
-                  <AnswerOption answer={'Oxygen'}></AnswerOption>
-                  <AnswerOption answer={'Carbon'}></AnswerOption>
+                  <View style={styles.row}>
+                    <AnswerOption answer={currentQuestion.options[0]} />
+                    <AnswerOption answer={currentQuestion.options[1]} />
+                  </View>
+                  <View style={styles.row}>
+                    <AnswerOption answer={currentQuestion.options[2]} />
+                    <AnswerOption answer={currentQuestion.options[3]} />
+                  </View>
                 </View>
-                <View style={styles.buttons}>
-                  <AnswerOption answer={'Hydrogen'}></AnswerOption>
-                  <AnswerOption answer={'Nitrogen'}></AnswerOption>
-                </View>
-                  <SubmitAnswer></SubmitAnswer>
+                <SubmitAnswer />
               </View>
-            )}
+            </>
+          )}
 
-
-            {screenWidth <= 800 && (
-
-              //THIS IS MOBILE VIEW
-
-              <View style={styles.container2}>
-                <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}/>
-                <Text style={styles.title1}>BRAINWAVE</Text>
-                <QuestionNumberMobile question={'Question 22'}></QuestionNumberMobile>
-                <QuestionBoxMobile question={'Which element is known as the "building block of life" due to its essential role in forming organic compounds?'}></QuestionBoxMobile>
-                <View style={styles.buttonsMobile}>
-                  <AnswerOptionMobile answer={'Oxygen'}></AnswerOptionMobile>
-                  <AnswerOptionMobile answer={'Carbon'}></AnswerOptionMobile>
+          {screenWidth <= 800 && (
+            <View style={styles.container2}>
+              <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />
+              <Text style={styles.title1}>BRAINWAVE</Text>
+              <QuestionNumberMobile question={`Question ${currentQuestion._id}`} />
+              <QuestionBoxMobile question={currentQuestion.text} />
+              <View style={styles.buttonsMobile}>
+                <View style={styles.rowMobile}>
+                  <AnswerOptionMobile answer={currentQuestion.options[0]} />
+                  <AnswerOptionMobile answer={currentQuestion.options[1]} />
                 </View>
-                <View style={styles.buttonsMobile}>
-                  <AnswerOptionMobile answer={'Hydrogen'}></AnswerOptionMobile>
-                  <AnswerOptionMobile answer={'Nitrogen'}></AnswerOptionMobile>
+                <View style={styles.rowMobile}>
+                  <AnswerOptionMobile answer={currentQuestion.options[2]} />
+                  <AnswerOptionMobile answer={currentQuestion.options[3]} />
                 </View>
-                <SubmitAnswerMobile></SubmitAnswerMobile>
               </View>
-            )}
-          </View>
+              <SubmitAnswerMobile />
+            </View>
+          )}
+
+          {/* Display number of questions */}
+          <Text style={styles.questionCount}>
+            {`Total Questions Fetched: ${questions.length}`}
+          </Text>
+        </View>
       </ImageBackground>
     </View>
   );
-} 
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -116,16 +133,31 @@ const styles = StyleSheet.create({
     fontFamily: 'Monofett-Regular',
   },
   buttons: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: 1100,
-    marginTop: 10
+    marginTop: 10,
   },
   buttonsMobile: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  rowMobile: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     marginTop: 10,
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+  },
+  questionCount: {
+    marginTop: 20,
+    fontSize: 18,
+    color: 'white',
   },
 });
