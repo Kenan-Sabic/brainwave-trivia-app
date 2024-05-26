@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
-import { getRandomMultipleChoiceQuestions } from '../services/apiService';  // Ensure the path is correct
+import { getRandomMultipleChoiceQuestions } from '../services/apiService';  
 
 // Components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';  
