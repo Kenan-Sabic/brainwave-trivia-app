@@ -81,7 +81,7 @@ export default function QuizTFScreen() {
             </View>
           )}
 
-          {/* Display number of questions */}
+          {/* Display number of questions '' ovdje nam vraca id tipa gjnedsjhew123 umjesto samo broja */}
           <Text style={styles.questionCount}>
             {`Total Questions Fetched: ${questions.length}`}
           </Text>
