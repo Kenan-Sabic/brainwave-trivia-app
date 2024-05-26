@@ -12,12 +12,15 @@ const apiService = axios.create({
 // User Authentication
 export const registerUser = async (userData) => {
   try {
-    useStore.getState().setUser(response.data.user);
-    useStore.getState().setToken(response.data.token);
     const response = await apiService.post('/auth/register', userData);
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    console.error('Error in registerUser', error); // Log the full error
+    if (error.response) {
+      throw error.response.data;
+    } else {
+      throw new Error('Network Error or unexpected issue');
+    }
   }
 };
 

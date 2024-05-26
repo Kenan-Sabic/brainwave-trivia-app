@@ -18,6 +18,8 @@ const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const errorHandler = require('./middleware/errorHandler'); 
 //library used to connect app to database
 const mongoose = require('mongoose');
+//Forgot to add CORS 
+const cors = require('cors');
 
 //application object used for pretty much everything to be put in the app
 const app = express();
@@ -38,6 +40,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
 });
+//Tell the app to use CORS so we can contact it from frontend
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
