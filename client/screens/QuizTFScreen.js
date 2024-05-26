@@ -1,82 +1,95 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
+import { getRandomTrueFalseQuestions } from '../services/apiService';  
 
-//Components
-
-//Web components
-import HeaderLargeScreen from './components/web/HeaderLargeScreen';
-import AnswerOption from './components/web/quiz question components/AnswerOption';
-import QuestionBox from './components/web/quiz question components/QuestionBox';
-import QuestionNumber from './components/web/quiz question components/QuestionNumber';
-import SubmitAnswer from './components/web/quiz question components/SubmitAnswer';
-
-//Mobile components
-
-import AnswerOptionMobile from './components/mobile/quiz question components/AnswerOptionMobile';
-import QuestionBoxMobile from './components/mobile/quiz question components/QuestionBoxMobile';
-import QuestionNumberMobile from './components/mobile/quiz question components/QuestionNumberMobile';
-import SubmitAnswerMobile from './components/mobile/quiz question components/SubmitAnswerMobile';
+// Components
+import HeaderLargeScreen from './components/web/HeaderLargeScreen';  
+import AnswerOption from './components/web/quiz question components/AnswerOption';  
+import QuestionBox from './components/web/quiz question components/QuestionBox';  
+import QuestionNumber from './components/web/quiz question components/QuestionNumber';  
+import SubmitAnswer from './components/web/quiz question components/SubmitAnswer';  
+import AnswerOptionMobile from './components/mobile/quiz question components/AnswerOptionMobile';  
+import QuestionBoxMobile from './components/mobile/quiz question components/QuestionBoxMobile';  
+import QuestionNumberMobile from './components/mobile/quiz question components/QuestionNumberMobile';  
+import SubmitAnswerMobile from './components/mobile/quiz question components/SubmitAnswerMobile';  
 
 export default function QuizTFScreen() {
   const screenWidth = Dimensions.get('window').width;
-  
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [error, setError] = useState(null);
 
-  let [fontsLoaded] = useFonts({
-    'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
-    'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
+  const [fontsLoaded] = useFonts({
+    'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),  
+    'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),  
   });
 
-  if (!fontsLoaded) {
-    return null;
+  useEffect(() => {
+    async function fetchQuestions() {
+      try {
+        const response = await getRandomTrueFalseQuestions(1);
+        setQuestions(response);
+        setCurrentQuestion(response[0]);
+      } catch (error) {
+        setError(error);
+        console.error('Error fetching questions:', error);
+      }
+    }
+
+    fetchQuestions();
+  }, []);
+
+  if (error) {
+    return <Text>Error: {error.message}</Text>;
+  }
+
+  if (!fontsLoaded || !currentQuestion) {
+    return <Text>Loading...</Text>;  
   }
 
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-        <View style={styles.layer}>            
-            
-            {screenWidth > 800 && (
-            
-              //THIS IS THE WEB VIEW
-             
-              <HeaderLargeScreen title={'MCQ Quiz'}></HeaderLargeScreen>
-            
-            )}
-            {screenWidth > 800 && (
+        <View style={styles.layer}>
+          {screenWidth > 800 && (
+            <>
+              <HeaderLargeScreen title={'MCQ Quiz'} />
               <View style={styles.container2}>
-                <QuestionNumber question={'Question 22'}></QuestionNumber>
-                <QuestionBox question={'The capital of China is Beijing.'}></QuestionBox>
+                <QuestionNumber question={`Question ${currentQuestion._id}`} />
+                <QuestionBox question={currentQuestion.text} />
                 <View style={styles.buttons}>
-                  <AnswerOption answer={'True'}></AnswerOption>
-                  <AnswerOption answer={'False'}></AnswerOption>
+                  <AnswerOption answer={'True'} />
+                  <AnswerOption answer={'False'} />
                 </View>
-                  <SubmitAnswer></SubmitAnswer>
+                <SubmitAnswer />
               </View>
-            )}
+            </>
+          )}
 
-
-            {screenWidth <= 800 && (
-
-              //THIS IS MOBILE VIEW
-
-              <View style={styles.container2}>
-                <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}/>
-                <Text style={styles.title1}>BRAINWAVE</Text>
-                <QuestionNumberMobile question={'Question 22'}></QuestionNumberMobile>
-                <QuestionBoxMobile question={'The capital of China is Beijing'}></QuestionBoxMobile>
-                <View style={styles.buttonsMobile}>
-                  <AnswerOptionMobile answer={'True'}></AnswerOptionMobile>
-                  <AnswerOptionMobile answer={'False'}></AnswerOptionMobile>
-                </View>
-                <SubmitAnswerMobile></SubmitAnswerMobile>
+          {screenWidth <= 800 && (
+            <View style={styles.container2}>
+              <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />
+              <Text style={styles.title1}>BRAINWAVE</Text>
+              <QuestionNumberMobile question={`Question ${currentQuestion._id}`} />
+              <QuestionBoxMobile question={currentQuestion.text} />
+              <View style={styles.buttonsMobile}>
+                <AnswerOptionMobile answer={'True'} />
+                <AnswerOptionMobile answer={'False'} />
               </View>
-            )}
-          </View>
+              <SubmitAnswerMobile />
+            </View>
+          )}
+
+          {/* Display number of questions */}
+          <Text style={styles.questionCount}>
+            {`Total Questions Fetched: ${questions.length}`}
+          </Text>
+        </View>
       </ImageBackground>
     </View>
   );
-} 
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -111,13 +124,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: 1100,
-    marginTop: 10
+    marginTop: 10,
   },
   buttonsMobile: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     marginTop: 10,
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+  },
+  questionCount: {
+    marginTop: 20,
+    fontSize: 18,
+    color: 'white',
   },
 });

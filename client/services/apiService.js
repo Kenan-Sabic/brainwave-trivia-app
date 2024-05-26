@@ -109,7 +109,7 @@ export const getRandomMultipleChoiceQuestions = async (count) => {
   }
 };
 
-// Questions - True/False
+// Questions - True/False 
 export const createTrueFalseQuestion = async (questionData) => {
   try {
     const response = await apiService.post('/questions/truefalse', questionData);
@@ -148,7 +148,7 @@ export const deleteTrueFalseQuestion = async (id) => {
 
 export const getRandomTrueFalseQuestions = async (count) => {
   try {
-    const response = await apiService.get('/questions/truefalse/random', { params: { count } });
+    const response = await apiService.get(`/questions/truefalse/random/${count}`);
     return response.data;
   } catch (error) {
     throw error.response.data;
