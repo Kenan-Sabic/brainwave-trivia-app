@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useFonts } from 'expo-font';
-import { StyleSheet, Text, View, ImageBackground, Image, TextInput, Dimensions, Alert, Pressable } from 'react-native';
+import { Snackbar } from 'react-native-paper';
+import { StyleSheet, Text, View, ImageBackground, Image, TextInput, Dimensions, Pressable, Alert } from 'react-native';
 import { registerUser } from '../services/apiService';
 import useStore from '../useStore';
 
@@ -8,10 +9,8 @@ import useStore from '../useStore';
 
 // Web components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';
-import ButtonWeb from './components/web/ButtonWeb';
 
 // Mobile components
-import ButtonMobile from './components/mobile/ButtonMobile';
 
 export default function RegisterScreen({ navigation }) {
   const screenWidth = Dimensions.get('window').width;
@@ -20,6 +19,8 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState('');
 
   const setUser = useStore(state => state.setUser);
   const setToken = useStore(state => state.setToken);
@@ -34,25 +35,20 @@ export default function RegisterScreen({ navigation }) {
   }
 
   const handleRegister = async () => {
-    console.log('Register button clicked');
     if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match');
+      setMessage('Passwords do not match');
+      setVisible(true);
       return;
     }
 
     setLoading(true);
 
     try {
-      console.log('Sending registration request', { username, password });
-      const response = await registerUser({ username, password });
-      console.log('Registration successful', response);
-      setUser(response.user);
-      setToken(response.token);
-      Alert.alert('Success', 'Registration successful');
-      navigation.navigate('Login');
+      await registerUser({ username, password });
+      navigation.navigate('RegistrationSuccess'); // Navigate to the success screen
     } catch (error) {
-      console.error('Registration error', error);
-      Alert.alert('Registration Error', error.message || 'Something went wrong');
+      setMessage(`Registration error: ${error.message}`);
+      setVisible(true);
     } finally {
       setLoading(false);
     }
@@ -130,11 +126,18 @@ export default function RegisterScreen({ navigation }) {
           </View>
         )}
       </ImageBackground>
+      <Snackbar
+        visible={visible}
+        onDismiss={() => setVisible(false)}
+        duration={Snackbar.DURATION_SHORT}
+      >
+        {message}
+      </Snackbar>
     </View>
   );
 }
-const styles = StyleSheet.create({
 
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -211,23 +214,44 @@ const styles = StyleSheet.create({
   },
   button:{
     backgroundColor: '#6EBFBB',  
-        width: 616,
-        height: 70,
-        marginVertical: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 15,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+    width: 616,
+    height: 70,
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonText: {
     fontSize: 30,
     fontFamily: 'Orbitron-Bold'
-},
-})
+  },
+  buttonMobile:{
+    backgroundColor: '#6EBFBB',  
+    width: 316,
+    height: 60,
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  buttonTextMobile: {
+    fontSize: 20,
+    fontFamily: 'Orbitron-Bold'
+  },
+});

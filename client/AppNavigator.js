@@ -13,6 +13,7 @@ import QuizTFScreen from './screens/QuizTFScreen';
 import GameOverScreen from './screens/GameOverScreen';
 import AboutScreen from './screens/About';
 import GenerateNicknameScreen from './screens/GenerateNicknameScreen';
+import RegistrationSuccessScreen from './screens/RegistrationSuccessScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="Nickname" component={GenerateNicknameScreen} options={{headerShown: false, animation: 'default'}} />
+            <Stack.Screen name="RegistrationSuccess" component={RegistrationSuccessScreen} options={{headerShown: false, animation: 'default'}}/>
 
             <Stack.Screen name="PlayMenu" component={PlayMenuScreen}  options={{headerShown: false, animation: 'default'}}/>
             <Stack.Screen name="Leaderboard" component={LeaderBoardMenuScreen} options={{headerShown: false, animation: 'default'}} />
