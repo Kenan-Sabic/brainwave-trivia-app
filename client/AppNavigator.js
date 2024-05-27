@@ -20,7 +20,10 @@ const Stack = createNativeStackNavigator();
 export default function AppNavigator() {
     return (
         <Stack.Navigator initialRouteName='Info'>
-             <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false, animation: 'default'}} />
+             
+            
+            
+            <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="QuizTF" component={QuizTFScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false, animation: 'default'}} />

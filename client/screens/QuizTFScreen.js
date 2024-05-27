@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { getRandomTrueFalseQuestions } from '../services/apiService';  
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';  
@@ -20,6 +20,7 @@ export default function QuizTFScreen() {
   const screenWidth = Dimensions.get('window').width;
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [error, setError] = useState(null);
 
   const [fontsLoaded] = useFonts({
@@ -42,6 +43,18 @@ export default function QuizTFScreen() {
     fetchQuestions();
   }, []);
 
+  const handleAnswerClick = (answer) => {
+    setSelectedAnswer(answer);
+  };
+
+  const handleSubmit = () => {
+    if (selectedAnswer === currentQuestion.correct_answer) {
+      toast.success("Correct Answer!");
+    } else {
+      toast.error("Wrong Answer. Try Again!");
+    }
+  };
+
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
@@ -61,10 +74,10 @@ export default function QuizTFScreen() {
                 <QuestionNumber question={`Question ${currentQuestion._id}`} />
                 <QuestionBox question={currentQuestion.text} />
                 <View style={styles.buttons}>
-                  <AnswerOption answer={'True'} />
-                  <AnswerOption answer={'False'} />
+                  <AnswerOption answer={'True'} onClick={() => handleAnswerClick('True')} />
+                  <AnswerOption answer={'False'} onClick={() => handleAnswerClick('False')} />
                 </View>
-                <SubmitAnswer />
+                <SubmitAnswer onClick={handleSubmit} />
               </View>
             </>
           )}
@@ -76,18 +89,18 @@ export default function QuizTFScreen() {
               <QuestionNumberMobile question={`Question ${currentQuestion._id}`} />
               <QuestionBoxMobile question={currentQuestion.text} />
               <View style={styles.buttonsMobile}>
-                <AnswerOptionMobile answer={'True'} />
-                <AnswerOptionMobile answer={'False'} />
+                <AnswerOptionMobile answer={'True'} onClick={() => handleAnswerClick('True')} />
+                <AnswerOptionMobile answer={'False'} onClick={() => handleAnswerClick('False')} />
               </View>
-              <SubmitAnswerMobile />
+              <SubmitAnswerMobile onClick={handleSubmit} />
             </View>
           )}
 
-          {/* Display number of questions '' ovdje nam vraca id tipa gjnedsjhew123 umjesto samo broja */}
           <Text style={styles.questionCount}>
             {`Total Questions Fetched: ${questions.length}`}
           </Text>
         </View>
+        <ToastContainer />
       </ImageBackground>
     </View>
   );
