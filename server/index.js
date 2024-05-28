@@ -23,6 +23,8 @@ const cors = require('cors');
 
 //application object used for pretty much everything to be put in the app
 const app = express();
+app.use(cors());
+
 //encryption private key from .env file
 const secretKey = process.env.JWT_SECRET;
 
@@ -41,7 +43,7 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.error('Error connecting to MongoDB:', err);
 });
 //Tell the app to use CORS so we can contact it from frontend
-app.use(cors());
+
 
 // Middleware to parse JSON bodies
 app.use(express.json());
