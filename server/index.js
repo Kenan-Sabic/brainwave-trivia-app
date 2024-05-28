@@ -12,6 +12,12 @@ const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
+app.use(cors());
+
+//encryption private key from .env file
+const secretKey = process.env.JWT_SECRET;
+
+
 
 mongoose.connect(process.env.MONGODB_URI, {
     bufferCommands: false,
@@ -24,8 +30,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
 });
+//Tell the app to use CORS so we can contact it from frontend
 
-app.use(cors());
+
+// Middleware to parse JSON bodies
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
