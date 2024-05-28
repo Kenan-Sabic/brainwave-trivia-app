@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
 
-export default function QuizMCQScreen() {
+export default function GameOverScreen() {
   const screenWidth = Dimensions.get('window').width;
-  
+  const navigation = useNavigation();
 
   let [fontsLoaded] = useFonts({
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
@@ -32,14 +33,11 @@ export default function QuizMCQScreen() {
               </View>
             )}
 
-{/* will need to adapt navbar accross the app */}
-           
-
-        <View style={styles.modalContainer}>
-             <View style={styles.modalContainer2}>
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContainer2}>
                 <Text style={styles.modalText}> GAME OVER </Text>
               </View>
-              <TouchableOpacity style={[styles.returnButton, styles.button]}>
+              <TouchableOpacity style={[styles.returnButton, styles.button]} onPress={() => navigation.navigate('Welcome')}>
                 <Text style={styles.returnText}> Return to home </Text>
               </TouchableOpacity>
             </View>
@@ -48,7 +46,7 @@ export default function QuizMCQScreen() {
       </ImageBackground>
     </View>
   );
-} 
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +68,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  layer: { //just over backgorund, for all question screens 
+  layer: { 
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
@@ -106,17 +104,16 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
-  
   modalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10,
-    width:'50%',
+    width: '50%',
   },
   modalContainer2: {
-    width:'100%',
-    backgroundColor: "rgba(201, 122, 19, 0.8)", //need to check colour of the sand to match 
+    width: '100%',
+    backgroundColor: "rgba(201, 122, 19, 0.8)",
     borderRadius: 20,
     padding: 40,
     alignItems: "center",
@@ -140,8 +137,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
   },
- 
- 
   returnButton: {
     backgroundColor: 'rgba(75, 143, 140, 1)',
     padding: 20,
@@ -154,7 +149,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontFamily: 'Orbitron-Bold',
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { getRandomMultipleChoiceQuestions } from '../services/apiService';
+import { useNavigation } from '@react-navigation/native';
 
 // Components
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';
@@ -21,6 +22,7 @@ export default function QuizMCQScreen() {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [showResult, setShowResult] = useState(false);
     const [error, setError] = useState(null);
+    const navigation = useNavigation();
 
     const [fontsLoaded] = useFonts({
         'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
@@ -50,10 +52,14 @@ export default function QuizMCQScreen() {
         setShowResult(true);
         setTimeout(() => {
             setShowResult(false);
-            setSelectedAnswer(null);
-            const nextQuestion = questions[(questions.indexOf(currentQuestion) + 1) % questions.length];
-            setCurrentQuestion(nextQuestion);
-        }, 3000); //waits few seconds before rendering new question, correcr and false alert works the same for all fo them 
+            if (!isCorrectAnswer(selectedAnswer)) {
+                navigation.navigate('GameOver');
+            } else {
+                setSelectedAnswer(null);
+                const nextQuestion = questions[(questions.indexOf(currentQuestion) + 1) % questions.length];
+                setCurrentQuestion(nextQuestion);
+            }
+        }, 3000);
     };
 
     if (error) {
@@ -157,6 +163,7 @@ export default function QuizMCQScreen() {
                             <SubmitAnswerMobile onSubmit={handleSubmit} />
                         </View>
                     )}
+                    
                     <Text style={styles.questionCount}>
                         {`Total Questions Fetched: ${questions.length}`}
                     </Text>
