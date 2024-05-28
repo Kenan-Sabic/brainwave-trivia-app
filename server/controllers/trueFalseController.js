@@ -3,15 +3,21 @@ const TrueFalseQuestion = require('../models/TrueFalseQuestion');
 const _ = require('lodash');
 
 // Get a specified number of random true/false questions
+//updated getrandom, to have count passed as integer not string
 exports.getRandomTrueFalseQuestions = async (req, res) => {
     try {
+        const count = parseInt(req.params.count, 10); 
+        if (isNaN(count)) {
+            return res.status(400).json({ error: 'Invalid count parameter' });
+        }
         const questions = await TrueFalseQuestion.find();
-        const randomQuestions = _.sampleSize(questions, req.params.count);
+        const randomQuestions = _.sampleSize(questions, count);
         res.status(200).json(randomQuestions);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 // Create a new true/false question
 exports.createTrueFalseQuestion = async (req, res) => {

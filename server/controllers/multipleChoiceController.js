@@ -4,11 +4,14 @@ const _ = require('lodash');
 
 
 
-// Get a specified number of random multiple choice questions
 exports.getRandomMultipleChoiceQuestions = async (req, res) => {
     try {
+        const count = parseInt(req.params.count, 10); //same thing with the tf, needed it to be integer not string 
+        if (isNaN(count)) {
+            return res.status(400).json({ error: 'Invalid count parameter' });
+        }
         const questions = await MultipleChoiceQuestion.find();
-        const randomQuestions = _.sampleSize(questions, req.params.count);
+        const randomQuestions = _.sampleSize(questions, count);
         res.status(200).json(randomQuestions);
     } catch (error) {
         res.status(500).json({ error: error.message });
