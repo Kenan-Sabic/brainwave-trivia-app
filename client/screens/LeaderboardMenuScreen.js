@@ -14,7 +14,7 @@ import LeaderNavButton from './components/web/LeaderNavButton';
 // Mobile components
 import LeaderboardMobile from './components/mobile/leaderboard components mobile/LeaderboardMobile';
 import PlayNavButtonMobile from './components/mobile/PlayNavButtonMobile';
-import LeaderNavButtonMobile from './components/mobile/LeaderNavButtonMobile';
+import LeaderNavButctonMobile from './components/mobile/LeaderNavButtonMobile';
 
 export default function LeaderBoardMenuScreen() {
   const screenWidth = Dimensions.get('window').width;

@@ -30,7 +30,7 @@ export default function QuizMCQScreen() {
     useEffect(() => {
         async function fetchQuestions() {
             try {
-                const response = await getRandomMultipleChoiceQuestions(1);
+                const response = await getRandomMultipleChoiceQuestions(10);
                 setQuestions(response);
                 setCurrentQuestion(response[0]);
             } catch (error) {
@@ -48,6 +48,12 @@ export default function QuizMCQScreen() {
 
     const handleSubmit = () => {
         setShowResult(true);
+        setTimeout(() => {
+            setShowResult(false);
+            setSelectedAnswer(null);
+            const nextQuestion = questions[(questions.indexOf(currentQuestion) + 1) % questions.length];
+            setCurrentQuestion(nextQuestion);
+        }, 3000); //waits few seconds before rendering new question, correcr and false alert works the same for all fo them 
     };
 
     if (error) {
