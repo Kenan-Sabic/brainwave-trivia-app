@@ -1,41 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { useFonts } from 'expo-font';
+import { Text, Pressable, StyleSheet } from 'react-native';
 
-export default function LeaderSelectButton({ title, onPress }) {
-  let [fontsLoaded] = useFonts({
-    'Orbitron-Bold': require('../../../assets/fonts/Orbitron-Bold.ttf'),
-    'Monofett-Regular': require('../../../assets/fonts/Monofett-Regular.ttf'),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
+export default function LeaderSelectButton({ title, onPress, selected }) {
   return (
-    <View style={styles.container}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonText}>{title}</Text>
-      </Pressable>
-    </View>
+    <Pressable 
+      onPress={onPress} 
+      style={[styles.button, selected && styles.selectedButton]}
+    >
+      <Text style={styles.buttonText}>{title}</Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    width: 250,
-  },
   button: {
-    borderRadius: 15,
+    backgroundColor: '#6EBFBB',
     padding: 10,
-    alignItems: 'center',
-    marginTop: 16,
-    width: '100%',
-    backgroundColor: 'rgb(110, 191, 187)',
+    margin: 5,
+    borderRadius: 5,
+  },
+  selectedButton: {
+    backgroundColor: '#FFFFFF',
   },
   buttonText: {
-    fontSize: 15,
-    fontFamily: 'Orbitron-Bold',
+    fontSize: 20,
   },
 });

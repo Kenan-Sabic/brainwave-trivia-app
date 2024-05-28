@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import LeaderSelectButton from './LeaderSelectButton';
 import { getLeaderboardByGameMode } from '../../../../services/apiService'; // Import the function from apiService.js
@@ -48,9 +48,21 @@ export default function LeaderWithButtons() {
   return (
     <View style={styles.leaderboard}>
       <View style={{ flexDirection: 'row' }}>
-        <LeaderSelectButton title='Multiple choice' onPress={() => handleCategorySelect('multipleChoice')} />
-        <LeaderSelectButton title='Fill in the blank' onPress={() => handleCategorySelect('fillBlank')} />
-        <LeaderSelectButton title='True/False' onPress={() => handleCategorySelect('trueFalse')} />
+        <LeaderSelectButton 
+          title='Multiple choice' 
+          onPress={() => handleCategorySelect('multipleChoice')} 
+          selected={selectedCategory === 'multipleChoice'}
+        />
+        <LeaderSelectButton 
+          title='Fill in the blank' 
+          onPress={() => handleCategorySelect('fillBlank')} 
+          selected={selectedCategory === 'fillBlank'}
+        />
+        <LeaderSelectButton 
+          title='True/False' 
+          onPress={() => handleCategorySelect('trueFalse')} 
+          selected={selectedCategory === 'trueFalse'}
+        />
       </View>
 
       <View style={styles.leaderboardDesktop}>
@@ -63,7 +75,7 @@ export default function LeaderWithButtons() {
         <View>
           <Text style={styles.leaderboardText}>Points</Text>
           {leaderboardData[selectedCategory].map((player, index) => (
-            <Text key={index} style={styles.leaderboardUser}>{player.score} pts</Text>
+            <Text key={index} style={styles.leaderboardUser}>{player.scores[`${selectedCategory}Score`]} pts</Text>
           ))}
         </View>
       </View>
