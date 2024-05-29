@@ -196,11 +196,12 @@ export const deleteFillBlankQuestion = async (id) => {
 
 export const getRandomFillBlankQuestions = async (count) => {
   try {
-    const response = await apiService.get('/questions/fillblank/random', { params: { count } });
-    return response.data;
+      const response = await apiService.get(`/questions/fillblank/random/${count}`);
+      return response.data;
   } catch (error) {
-    throw error.response.data;
-  }
+      throw error.response.data;
+  } 
+
 };
 
 // Leaderboard

@@ -1,5 +1,5 @@
 const TrueFalseQuestion = require('../models/TrueFalseQuestion');
-//library for easier array operations we use it to get random questions from the database
+
 const _ = require('lodash');
 
 // Get a specified number of random true/false questions

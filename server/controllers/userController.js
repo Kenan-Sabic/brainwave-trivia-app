@@ -25,7 +25,7 @@ exports.updateUserScoresById = async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Only update scores if the new score is higher than the existing score
+        
         if (trueFalseScore !== undefined && trueFalseScore > user.scores.trueFalseScore) {
             user.scores.trueFalseScore = trueFalseScore;
         }
