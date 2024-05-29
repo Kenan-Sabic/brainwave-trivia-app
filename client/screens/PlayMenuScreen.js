@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ImageBackground, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
 
 //Components
 
@@ -15,15 +16,15 @@ import ButtonMobile from './components/mobile/ButtonMobile';
 import PlayNavButtonMobile from './components/mobile/PlayNavButtonMobile';
 import LeaderNavButtonMobile from './components/mobile/LeaderNavButtonMobile';
 
-
 export default function PlayMenuScreen() {
-
   const screenWidth = Dimensions.get('window').width;
+  const navigation = useNavigation();
 
   let [fontsLoaded] = useFonts({
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
     'Orbitron-Bold': require('./assets/fonts/Orbitron-Bold.ttf'),
   });
+
   if (!fontsLoaded) {
     return null;
   }
@@ -31,39 +32,26 @@ export default function PlayMenuScreen() {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
-      
-     
-      {screenWidth > 800 && (
-
-      //THIS IS THE WEB VIEW
-      
-      <HeaderLargeScreen title="Play modes"></HeaderLargeScreen>)}
-      
-      {screenWidth > 800 && ( 
-          <View style={styles.container2}> 
+        {screenWidth > 800 && (
+          <HeaderLargeScreen title="Play modes"></HeaderLargeScreen>
+        )}
+        {screenWidth > 800 && (
+          <View style={styles.container2}>
             <View style={styles.buttonsContainer}>
               <PlayNavButton opacity={1}></PlayNavButton>
               <LeaderNavButton opacity={0.7}></LeaderNavButton>
-            </View>     
+            </View>
             <View style={styles.questionsContainer}>
               <ButtonWeb screen='QuizMCQ' title="Multiple choice"></ButtonWeb>
               <ButtonWeb screen='QuizTF' title="True/False"></ButtonWeb>
-              <ButtonWeb title="Fill in the blank"></ButtonWeb>
-              <ButtonWeb title="Mixed"></ButtonWeb>
+              <ButtonWeb screen='QuizFB' title="Fill in the blank"></ButtonWeb>
             </View>
           </View>
-      )}
-      
-      <View style={styles.container2}>
-        
+        )}
         {screenWidth <= 800 && (
-        
-        //THIS IS THE MOBILE VIEW
-
-        <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner}  /> )}
-        
-        {screenWidth <= 800 && (<Text style={styles.title1}>BRAINWAVE</Text>)}
-        {screenWidth <= 800 && (
+          <View style={styles.container2}>
+            <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />
+            <Text style={styles.title1}>BRAINWAVE</Text>
             <View>
               <View style={styles.buttonsContainer}>
                 <PlayNavButtonMobile opacity={1}></PlayNavButtonMobile>
@@ -72,12 +60,11 @@ export default function PlayMenuScreen() {
               <View style={styles.questionsContainer}>
                 <ButtonMobile screen='QuizMCQ' title="Multiple choice"></ButtonMobile>
                 <ButtonMobile screen='QuizTF' title="True/False"></ButtonMobile>
-                <ButtonMobile title="Fill in the blank"></ButtonMobile> 
-                <ButtonMobile title="Mixed"></ButtonMobile>
+                <ButtonMobile screen='QuizFB' title="Fill in the blank"></ButtonMobile>
               </View>
             </View>
+          </View>
         )}
-      </View>
       </ImageBackground>
     </View>
   );
@@ -108,16 +95,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 32
   },
-  logoBanner:{
-    width:325,
-    height:140,
+  logoBanner: {
+    width: 325,
+    height: 140,
     resizeMode: 'contain',
     marginTop: 56,
     marginBottom: 32
   },
   title1: {
-    fontSize:55,
+    fontSize: 55,
     color: 'black',
-    fontFamily: 'Monofett-Regular' 
+    fontFamily: 'Monofett-Regular'
   },
 });

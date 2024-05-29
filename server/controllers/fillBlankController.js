@@ -5,8 +5,12 @@ const _ = require('lodash');
 // Get a specified number of random fill in the blank questions
 exports.getRandomFillBlankQuestions = async (req, res) => {
     try {
+        const count = parseInt(req.params.count, 10);
+        if (isNaN(count)) {
+            return res.status(400).json({ error: 'Invalid count parameter' });
+        }
         const questions = await FillBlankQuestion.find();
-        const randomQuestions = _.sampleSize(questions, req.params.count);
+        const randomQuestions = _.sampleSize(questions, count);
         res.status(200).json(randomQuestions);
     } catch (error) {
         res.status(500).json({ error: error.message });

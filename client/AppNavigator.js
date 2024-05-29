@@ -14,6 +14,7 @@ import GameOverScreen from './screens/GameOverScreen';
 import AboutScreen from './screens/About';
 import GenerateNicknameScreen from './screens/GenerateNicknameScreen';
 import RegistrationSuccessScreen from './screens/RegistrationSuccessScreen';
+import QuizBlankScreen from './screens/QuizBlankScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ export default function AppNavigator() {
              
            
             
-           
+             <Stack.Screen name="QuizFB" component={QuizBlankScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="QuizTF" component={QuizTFScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false, animation: 'default'}} />
