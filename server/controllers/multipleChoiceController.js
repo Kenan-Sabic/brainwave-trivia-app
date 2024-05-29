@@ -28,7 +28,7 @@ exports.createMultipleChoiceQuestion = async (req, res) => {
     }
 };
 
-// Get all multiple choice questions
+// Get 
 exports.getAllMultipleChoiceQuestions = async (req, res) => {
     try {
         const questions = await MultipleChoiceQuestion.find();
@@ -38,7 +38,7 @@ exports.getAllMultipleChoiceQuestions = async (req, res) => {
     }
 };
 
-// Get a single multiple choice question by ID
+// Get  by ID
 exports.getMultipleChoiceQuestionById = async (req, res) => {
     try {
         const question = await MultipleChoiceQuestion.findById(req.params.id);
@@ -51,7 +51,7 @@ exports.getMultipleChoiceQuestionById = async (req, res) => {
     }
 };
 
-// Update a multiple choice question by ID
+// Update  by ID
 exports.updateMultipleChoiceQuestionById = async (req, res) => {
     try {
         const question = await MultipleChoiceQuestion.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -64,7 +64,7 @@ exports.updateMultipleChoiceQuestionById = async (req, res) => {
     }
 };
 
-// Delete a multiple choice question by ID
+// Delete  by ID
 exports.deleteMultipleChoiceQuestionById = async (req, res) => {
     try {
         const question = await MultipleChoiceQuestion.findByIdAndDelete(req.params.id);

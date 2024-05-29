@@ -1,8 +1,8 @@
 const FillBlankQuestion = require('../models/FillBlankQuestion');
-//library for easier array operations we use it to get random questions from the databasevazi
+
 const _ = require('lodash');
 
-// Get a specified number of random fill in the blank questions
+
 exports.getRandomFillBlankQuestions = async (req, res) => {
     try {
         const count = parseInt(req.params.count, 10);
@@ -17,7 +17,7 @@ exports.getRandomFillBlankQuestions = async (req, res) => {
     }
 };
 
-// Create a new fill in the blank question
+
 exports.createFillBlankQuestion = async (req, res) => {
     try {
         const question = await FillBlankQuestion.create(req.body);
@@ -27,7 +27,7 @@ exports.createFillBlankQuestion = async (req, res) => {
     }
 };
 
-// Get all fill in the blank questions
+
 exports.getAllFillBlankQuestions = async (req, res) => {
     try {
         const questions = await FillBlankQuestion.find();
@@ -37,7 +37,7 @@ exports.getAllFillBlankQuestions = async (req, res) => {
     }
 };
 
-// Get a single fill in the blank question by ID
+
 exports.getFillBlankQuestionById = async (req, res) => {
     try {
         const question = await FillBlankQuestion.findById(req.params.id);
@@ -50,7 +50,7 @@ exports.getFillBlankQuestionById = async (req, res) => {
     }
 };
 
-// Update a fill in the blank question by ID
+
 exports.updateFillBlankQuestionById = async (req, res) => {
     try {
         const question = await FillBlankQuestion.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -63,7 +63,7 @@ exports.updateFillBlankQuestionById = async (req, res) => {
     }
 };
 
-// Delete a fill in the blank question by ID
+
 exports.deleteFillBlankQuestionById = async (req, res) => {
     try {
         const question = await FillBlankQuestion.findByIdAndDelete(req.params.id);
