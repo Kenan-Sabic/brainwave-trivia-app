@@ -2,11 +2,10 @@ import axios from 'axios';
 import useStore from '../useStore';
 
 // Set your server base URL
-const BASE_URL = 'http://localhost:8000/api';
 
-const apiService = axios.create({
-  baseURL: BASE_URL,
-  timeout: 10000,
+
+const api = axios.create({
+  baseURL: process.env.API_URL || 'http://localhost:8000/api',
 });
 
 // User Authentication
