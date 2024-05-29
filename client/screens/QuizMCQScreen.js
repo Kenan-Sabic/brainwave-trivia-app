@@ -36,9 +36,9 @@ export default function QuizMCQScreen() {
                 const response = await getRandomMultipleChoiceQuestions(10);
                 setQuestions(response);
                 setCurrentQuestion(response[0]);
-                setQuestionNumber(1); // Reset question number
-                setSelectedAnswer(null); // Reset selected answer
-                setShowResult(false); // Reset show result state
+                setQuestionNumber(1); // i need this to reset  question number
+                setSelectedAnswer(null); // i need this to reset selected answer
+                setShowResult(false); // i need this to  show result state (restarted)
             } catch (error) {
                 setError(error);
                 console.error('Error fetching questions:', error);

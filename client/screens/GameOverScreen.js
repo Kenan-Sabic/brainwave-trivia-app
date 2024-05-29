@@ -20,7 +20,7 @@ export default function GameOverScreen() {
   const handlePlayAgain = () => {
     navigation.reset({
       index: 0,
-      routes: [{ name: 'QuizMCQ' }],
+      routes: [{ name: 'PlayMenu' }],
     });
   };
 
