@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
     return (
-        <Stack.Navigator initialRouteName='Info'>
+        <Stack.Navigator initialRouteName='Leaderboard'>
              
            
             

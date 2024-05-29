@@ -13,7 +13,9 @@ export default function AnswerOption({ answer, onPress, isSelected, isCorrect, s
     }
 
     const getBackgroundColor = () => {
-        if (!showResult) return 'rgb(75, 143, 140)';
+        if (!showResult) {
+            return isSelected ? 'rgba(110, 191, 187, 0.9)' : 'rgb(75, 143, 140)';
+        }
         if (isSelected && isCorrect) return 'green';
         if (isSelected && !isCorrect) return 'red';
         return 'rgb(75, 143, 140)';

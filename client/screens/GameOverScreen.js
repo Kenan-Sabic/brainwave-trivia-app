@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+import HeaderLargeScreen from './components/HeaderLargeScreen';
 
 export default function GameOverScreen() {
   const screenWidth = Dimensions.get('window').width;
@@ -16,6 +17,13 @@ export default function GameOverScreen() {
     return null;
   }
 
+  const handlePlayAgain = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'QuizMCQ' }],
+    });
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
@@ -24,21 +32,18 @@ export default function GameOverScreen() {
             {screenWidth <= 800 && <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />}
             {screenWidth <= 800 && <Text style={styles.title1}>BRAINWAVE</Text>}
             {screenWidth > 800 && (
-              <View style={styles.header}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={require('./assets/images/brain.svg')} style={styles.brain} />
-                  <Text style={styles.title1Desktop}>BRAINWAVE</Text>
-                </View>
-                <Text style={styles.title2Desktop}>MCQ Questions</Text>
-              </View>
+              <HeaderLargeScreen title='Game over'></HeaderLargeScreen>
             )}
 
             <View style={styles.modalContainer}>
               <View style={styles.modalContainer2}>
                 <Text style={styles.modalText}> GAME OVER </Text>
               </View>
-              <TouchableOpacity style={[styles.returnButton, styles.button]} onPress={() => navigation.navigate('Welcome')}>
+              <TouchableOpacity style={[styles.returnButton, styles.button]} onPress={() => navigation.navigate('PlayMenu')}>
                 <Text style={styles.returnText}> Return to home </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.returnButton, styles.button]} onPress={handlePlayAgain}>
+                <Text style={styles.returnText}> Play again </Text>
               </TouchableOpacity>
             </View>
           </View>

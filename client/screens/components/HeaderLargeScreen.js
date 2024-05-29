@@ -9,8 +9,8 @@ export default function HeaderLargeScreen({ title }) {
   const username = useStore(state => state.user?.username);
 
   let [fontsLoaded] = useFonts({
-    'Orbitron-Bold': require('../../assets/fonts/Orbitron-Bold.ttf'),
-    'Monofett-Regular': require('../../assets/fonts/Monofett-Regular.ttf'),
+    'Orbitron-Bold': require('../assets/fonts/Orbitron-Bold.ttf'),
+    'Monofett-Regular': require('../assets/fonts/Monofett-Regular.ttf'),
   });
 
   if (!fontsLoaded) {
@@ -19,7 +19,7 @@ export default function HeaderLargeScreen({ title }) {
 
   return (
     <View style={styles.header}>
-      <Image source={require('../../assets/images/brain.svg')} />
+      <Image source={require('../assets/images/brain.svg')} />
       <Text style={styles.title1}>BRAINWAVE</Text>
       <Pressable onPress={() => navigation.navigate('PlayMenu')}>
         <Text style={styles.navigationPressable}>Home</Text>

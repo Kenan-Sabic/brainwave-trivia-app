@@ -22,6 +22,7 @@ export default function QuizMCQScreen() {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [showResult, setShowResult] = useState(false);
     const [error, setError] = useState(null);
+    const [questionNumber, setQuestionNumber] = useState(1);
     const navigation = useNavigation();
 
     const [fontsLoaded] = useFonts({
@@ -35,6 +36,9 @@ export default function QuizMCQScreen() {
                 const response = await getRandomMultipleChoiceQuestions(10);
                 setQuestions(response);
                 setCurrentQuestion(response[0]);
+                setQuestionNumber(1); // Reset question number
+                setSelectedAnswer(null); // Reset selected answer
+                setShowResult(false); // Reset show result state
             } catch (error) {
                 setError(error);
                 console.error('Error fetching questions:', error);
@@ -58,6 +62,7 @@ export default function QuizMCQScreen() {
                 setSelectedAnswer(null);
                 const nextQuestion = questions[(questions.indexOf(currentQuestion) + 1) % questions.length];
                 setCurrentQuestion(nextQuestion);
+                setQuestionNumber((prevNumber) => prevNumber + 1);
             }
         }, 3000);
     };
@@ -80,7 +85,7 @@ export default function QuizMCQScreen() {
                         <>
                             <HeaderLargeScreen title={'MCQ Quiz'} />
                             <View style={styles.container2}>
-                                <QuestionNumber question={`Question ${currentQuestion._id}`} />
+                                <QuestionNumber question={`Question ${questionNumber}`} />
                                 <QuestionBox question={currentQuestion.text} />
                                 <View style={styles.buttons}>
                                     <View style={styles.row}>

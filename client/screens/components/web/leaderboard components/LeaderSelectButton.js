@@ -14,13 +14,16 @@ export default function LeaderSelectButton({ title, onPress, selected }) {
 
 const styles = StyleSheet.create({
   button: {
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#6EBFBB',
     padding: 10,
     margin: 5,
-    borderRadius: 5,
+    width: 200,
+    borderRadius: 15,
   },
   selectedButton: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F5D7AE',
   },
   buttonText: {
     fontSize: 20,
