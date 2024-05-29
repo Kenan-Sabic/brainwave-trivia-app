@@ -24,6 +24,7 @@ export default function QuizTFScreen() {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [showResult, setShowResult] = useState(false);
     const [error, setError] = useState(null);
+    const [questionNumber, setQuestionNumber] = useState(1);
     const navigation = useNavigation();
 
     const [fontsLoaded] = useFonts({
@@ -58,6 +59,7 @@ export default function QuizTFScreen() {
                 const nextQuestion = questions[(questions.indexOf(currentQuestion) + 1) % questions.length];
                 setCurrentQuestion(nextQuestion);
                 setSelectedAnswer(null);
+                setQuestionNumber((prevNumber) => prevNumber + 1);
             } else {
                 navigation.navigate('GameOver');
             }
@@ -82,7 +84,7 @@ export default function QuizTFScreen() {
                         <>
                             <HeaderLargeScreen title={'TF Quiz'} />
                             <View style={styles.container2}>
-                                <QuestionNumber question={`Question ${currentQuestion._id}`} />
+                                <QuestionNumber question={`Question ${questionNumber}`} />
                                 <QuestionBox question={currentQuestion.text} />
                                 <View style={styles.buttons}>
                                     <AnswerOption 
@@ -108,7 +110,7 @@ export default function QuizTFScreen() {
                         <View style={styles.container2}>
                             <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />
                             <Text style={styles.title1}>BRAINWAVE</Text>
-                            <QuestionNumberMobile question={`Question ${currentQuestion._id}`} />
+                            <QuestionNumberMobile question={`Question ${questionNumber}`} />
                             <QuestionBoxMobile question={currentQuestion.text} />
                             <View style={styles.buttonsMobile}>
                                 <AnswerOptionMobile 

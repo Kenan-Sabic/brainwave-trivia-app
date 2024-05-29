@@ -18,7 +18,7 @@ exports.getRandomMultipleChoiceQuestions = async (req, res) => {
     }
 };
 
-// Create a new multiple choice question
+// i need this to crete a new mck  question
 exports.createMultipleChoiceQuestion = async (req, res) => {
     try {
         const question = await MultipleChoiceQuestion.create(req.body);
