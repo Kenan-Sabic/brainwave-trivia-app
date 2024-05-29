@@ -208,9 +208,15 @@ export const getLeaderboardByGameMode = async (gameMode) => {
     const response = await apiService.get(`/leaderboard/${gameMode}`);
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    console.error('Error in getLeaderboardByGameMode', error); // Log the full error
+    if (error.response) {
+      throw error.response.data;
+    } else {
+      throw new Error('Network Error or unexpected issue');
+    }
   }
 };
+
 
 export default apiService;
 

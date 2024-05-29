@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
+import HeaderLargeScreen from './components/HeaderLargeScreen';
 
-export default function QuizMCQScreen() {
+export default function GameOverScreen() {
   const screenWidth = Dimensions.get('window').width;
-  
+  const navigation = useNavigation();
 
   let [fontsLoaded] = useFonts({
     'Monofett-Regular': require('./assets/fonts/Monofett-Regular.ttf'),
@@ -15,6 +17,13 @@ export default function QuizMCQScreen() {
     return null;
   }
 
+  const handlePlayAgain = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'PlayMenu' }],
+    });
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
@@ -23,24 +32,18 @@ export default function QuizMCQScreen() {
             {screenWidth <= 800 && <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />}
             {screenWidth <= 800 && <Text style={styles.title1}>BRAINWAVE</Text>}
             {screenWidth > 800 && (
-              <View style={styles.header}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={require('./assets/images/brain.svg')} style={styles.brain} />
-                  <Text style={styles.title1Desktop}>BRAINWAVE</Text>
-                </View>
-                <Text style={styles.title2Desktop}>MCQ Questions</Text>
-              </View>
+              <HeaderLargeScreen title='Game over'></HeaderLargeScreen>
             )}
 
-{/* will need to adapt navbar accross the app */}
-           
-
-        <View style={styles.modalContainer}>
-             <View style={styles.modalContainer2}>
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContainer2}>
                 <Text style={styles.modalText}> GAME OVER </Text>
               </View>
-              <TouchableOpacity style={[styles.returnButton, styles.button]}>
+              <TouchableOpacity style={[styles.returnButton, styles.button]} onPress={() => navigation.navigate('PlayMenu')}>
                 <Text style={styles.returnText}> Return to home </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.returnButton, styles.button]} onPress={handlePlayAgain}>
+                <Text style={styles.returnText}> Play again </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -48,7 +51,7 @@ export default function QuizMCQScreen() {
       </ImageBackground>
     </View>
   );
-} 
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  layer: { //just over backgorund, for all question screens 
+  layer: { 
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
@@ -106,17 +109,16 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
-  
   modalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10,
-    width:'50%',
+    width: '50%',
   },
   modalContainer2: {
-    width:'100%',
-    backgroundColor: "rgba(201, 122, 19, 0.8)", //need to check colour of the sand to match 
+    width: '100%',
+    backgroundColor: "rgba(201, 122, 19, 0.8)",
     borderRadius: 20,
     padding: 40,
     alignItems: "center",
@@ -140,8 +142,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
   },
- 
- 
   returnButton: {
     backgroundColor: 'rgba(75, 143, 140, 1)',
     padding: 20,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontFamily: 'Orbitron-Bold',
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
