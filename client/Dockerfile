@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 8081
 
 # Start the Expo server
-CMD ["expo", "start"]
+CMD ["npx", "expo", "start"]
