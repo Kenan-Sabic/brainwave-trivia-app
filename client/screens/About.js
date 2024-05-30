@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import HeaderLargeScreen from './components/web/HeaderLargeScreen';
 import { useFonts } from 'expo-font';
 
@@ -7,7 +7,7 @@ export default function AboutScreen(){
 
     let [fontsLoaded] = useFonts({
     
-        //'Orbitron-Bold': require('../../assets/fonts/Orbitron-Bold.ttf'),
+        'Orbitron-Bold': require('../screens/assets/fonts/Orbitron-Bold.ttf'),
         'Monofett-Regular': require('../screens/assets/fonts/Monofett-Regular.ttf'),
       });
       if (!fontsLoaded) {

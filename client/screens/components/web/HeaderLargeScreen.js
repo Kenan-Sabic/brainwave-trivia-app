@@ -33,8 +33,8 @@ export default function HeaderLargeScreen({ title }) {
       <Pressable onPress={() => navigation.navigate('Leaderboard')}>
         <Text style={styles.navigationPressable}>Leaderboard</Text>
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('Info')}>
-        <Text style={styles.navigationPressable}>Info</Text>
+      <Pressable onPress={() => navigation.navigate('About')}>
+        <Text style={styles.navigationPressable}>About us</Text>
       </Pressable>
       <Pressable onPress={handleLogout}>
         <Text style={styles.navigationPressable}>Log out</Text>

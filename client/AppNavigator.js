@@ -29,11 +29,8 @@ export default function AppNavigator() {
             <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="Nickname" component={GenerateNicknameScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="RegistrationSuccess" component={RegistrationSuccessScreen} options={{headerShown: false, animation: 'default'}}/>
-
             <Stack.Screen name="PlayMenu" component={PlayMenuScreen}  options={{headerShown: false, animation: 'default'}}/>
-            <Stack.Screen name="Leaderboard" component={LeaderBoardMenuScreen} options={{headerShown: false, animation: 'default'}} />
-           
-           
+            <Stack.Screen name="Leaderboard" component={LeaderBoardMenuScreen} options={{headerShown: false, animation: 'default'}} />           
             <Stack.Screen name="GameOver" component={GameOverScreen}  options={{headerShown: false, animation: 'default'}}/>
             <Stack.Screen name="About" component={AboutScreen}  options={{headerShown: false, animation: 'default'}}/>
         </Stack.Navigator>

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import HeaderLargeScreen from './components/HeaderLargeScreen';
+import HeaderLargeScreen from './components/web/HeaderLargeScreen';
 
 export default function GameOverScreen() {
   const screenWidth = Dimensions.get('window').width;
