@@ -83,7 +83,7 @@ export default function QuizFillInTheBlankScreen() {
                 <View style={styles.layer}>
                     {screenWidth > 800 ? (
                         <>
-                            <HeaderLargeScreen title={'QuizFB'} />
+                            <HeaderLargeScreen title={'Fill in the blank'} />
                             <View style={styles.container2}>
                                 <QuestionNumber question={`Question ${questionNumber}`} />
                                 <QuestionBox question={currentQuestion.text} />

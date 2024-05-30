@@ -20,11 +20,8 @@ const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
     return (
-        <Stack.Navigator initialRouteName='Leaderboard'>
-             
-           
-            
-             <Stack.Screen name="QuizFB" component={QuizBlankScreen} options={{headerShown: false, animation: 'default'}} />
+        <Stack.Navigator initialRouteName="Welcome">        
+            <Stack.Screen name="QuizFB" component={QuizBlankScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="QuizTF" component={QuizTFScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name="QuizMCQ" component={QuizMCQScreen} options={{headerShown: false, animation: 'default'}} />
             <Stack.Screen name='Welcome' component={WelcomeScreen} options={{headerShown: false, animation: 'default'}} />

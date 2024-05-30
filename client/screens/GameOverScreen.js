@@ -29,10 +29,8 @@ export default function GameOverScreen() {
       <ImageBackground source={require('./assets/images/background1.png')} style={styles.background}>
         <View style={styles.layer}>
           <View style={[styles.container2, screenWidth > 800 && styles.container2Desktop]}>
-            {screenWidth <= 800 && <Image source={require('./assets/images/brainBanner.gif')} style={styles.logoBanner} />}
-            {screenWidth <= 800 && <Text style={styles.title1}>BRAINWAVE</Text>}
             {screenWidth > 800 && (
-              <HeaderLargeScreen title='Game over'></HeaderLargeScreen>
+              <HeaderLargeScreen title="Game over"></HeaderLargeScreen>
             )}
 
             <View style={styles.modalContainer}>

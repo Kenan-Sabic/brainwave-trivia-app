@@ -67,8 +67,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   username: {
-    position: 'absolute',
-    right: 150, // Adjust this value as needed
     color: 'white',
     fontFamily: 'Orbitron-Bold',
     fontSize: 25,
